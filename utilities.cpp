@@ -1,7 +1,7 @@
 //
 // Created by itke on 4/20/2022.
 //
-
+#include <map>
 #include "utilities.h"
 using std::cout;
 using std::string;
@@ -9,8 +9,9 @@ using std::ostream;
 using std::endl;
 
 
+
 /* ---------------------------------------------------------------------------------------------- */
- 
+
 // ----------------       Print functions for Player class          -----------------------
 
 void printPlayerDetails(ostream &os, string name, string job, int level, int force, int HP, int coins)
@@ -43,18 +44,18 @@ void printPlayerDetails(ostream &os, string name, string job, int level, int for
 
 /* ---------------------------------------------------------------------------------------------- */
 
-// ----------------------------        Print functions for Card class         --------------------------
+// ----------------------------        Print functions for Fairy class         --------------------------
 
 void printCardDetails(ostream &os, string name)
 {
-    os << "Card Details:" << endl;
+    os << "Fairy Details:" << endl;
     os << "Name: " << name << endl;
 }
 
 void printEndOfCardDetails(ostream &os)
 {
     os << "-------------------------------" << std::endl;
-}  
+}
 
 void printMerchantInitialMessageForInteractiveEncounter(ostream &os, string playerName, int coins)
 {
@@ -75,7 +76,7 @@ void printMonsterDetails(ostream &os, int force, int damage, int coins, bool isD
     os << "Force: " << force << endl;
     if (isDragon)
         os << "Damage upon loss: " << "Infinite" << endl;
-    else        
+    else
         os << "Damage upon loss: " << damage << endl;
     os << "Coins: " << coins << endl;
 }
@@ -210,5 +211,27 @@ void printGameEndMessage()
 {
     cout << "The Game has ended!!!" << endl;
 }
+void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalidError()){
+    std::string theInput;
+    int inputAsInt;
+    do {
+        std::getline(std::cin, theInput);
 
+        while (std::cin.fail() || std::cin.eof() || theInput.find_first_not_of("0123456789") != std::string::npos) {
+            if(std::cin.eof()){
+                //throw
+            }
+            invalidError();
 
+            if (theInput.find_first_not_of("0123456789") == std::string::npos) {
+                std::cin.clear();
+                std::cin.ignore(256, '\n');
+            }
+
+            std::getline(std::cin, theInput);
+        }
+        std::string::size_type st;
+        inputAsInt = std::stoi(theInput, &st);
+    } while (inputAsInt < startOfRange || inputAsInt > endOfRange);
+    dest = inputAsInt;
+}
