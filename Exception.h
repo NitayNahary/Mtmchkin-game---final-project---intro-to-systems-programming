@@ -1,21 +1,48 @@
 
 #ifndef HW4_EXCEPTION_H
 #define HW4_EXCEPTION_H
-#include <exception>
+#include <string>
 class exception {
 public:
-    exception() = default;
-    exception(const exception&) = default;
-    exception& operator=(const exception&) = default;
     virtual ~exception() = default;
-    virtual const char* what() const = 0;
+    virtual std::string what() const = 0;
 };
 
 class DeckFileNotFound : public exception {
+    std::string what() const override{
+        return "Deck File Error: File not found";
+    }
+};
 
-}
-class DeckFileFormatError{};
-class DeckFileInvalidSize{};
+class DeckFileFormatError : public exception {
+    int m_lineNumber;
+    std::string m_badInput;
+public:
+    DeckFileFormatError(int lineNumber, std::string badInput) : m_lineNumber(lineNumber), m_badInput(badInput){}
+    std::string what() const override{
+        char outPut[200] = {'\0'};
+        sprintf(outPut, "Deck File Error: File format error in line %d", m_lineNumber);
+        return outPut;
+    }
+};
+class DeckFileInvalidSize : public exception {
+    std::string what() const override{
+        return "Deck File Error: Deck size is invalid";
+    }
+};
+
+class InvalidName : public exception{
+    std::string what() const override{
+        return "Invalid Name";
+    }
+};
+
+class EndOfFile : public exception{
+    std::string what() const override{
+        return "End Of File";
+    }
+};
+
 
 
 
