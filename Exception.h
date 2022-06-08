@@ -16,9 +16,8 @@ class DeckFileNotFound : public exception {
 
 class DeckFileFormatError : public exception {
     int m_lineNumber;
-    std::string m_badInput;
 public:
-    DeckFileFormatError(int lineNumber, std::string badInput) : m_lineNumber(lineNumber), m_badInput(badInput){}
+    DeckFileFormatError(int lineNumber) : m_lineNumber(lineNumber){}
     std::string what() const override{
         char outPut[200] = {'\0'};
         sprintf(outPut, "Deck File Error: File format error in line %d", m_lineNumber);
@@ -40,6 +39,11 @@ class InvalidName : public exception{
 class EndOfFile : public exception{
     std::string what() const override{
         return "End Of File";
+    }
+};
+class GeneralError : public exception{
+    std::string what() const override{
+        return "Reason Unknown";
     }
 };
 

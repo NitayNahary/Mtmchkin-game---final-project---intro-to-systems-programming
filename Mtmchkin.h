@@ -18,13 +18,18 @@
 #include "Players/Player.h"
 #include "Players/Fighter.h"
 #include "Players/Wizard.h"
-#include "Players/Rouge.h"
+#include "Players/Rogue.h"
 
 #include "Queue.h"
 #include "SmartPtr.h"
 #include "utilities.h"
+#include <memory>
 
-#define BUFFER_SIZE 17
+#define NOT_FOUND -1
+#define FOUND 1
+#define MIN_DECK_SIZE 5
+#define MIN_PLAYERS 2
+#define MAX_PLAYERS 6
 
 
 enum class CardTypes{Barfight , Dragon , Fairy , Goblin , Merchant , Treasure , Pitfall , Vampire};
@@ -71,10 +76,10 @@ public:
 
 
 private:
-    Queue<SmartPtr<Card>> m_deck;
-    Queue<SmartPtr<Player>> m_activePlayers;
-    Queue<SmartPtr<Player>> m_winPlayers;
-    Queue<SmartPtr<Player>> m_deadPlayers;
+    Queue<std::shared_ptr<Card>> m_deck;
+    Queue<std::shared_ptr<Player>> m_activePlayers;
+    Queue<std::shared_ptr<Player>> m_winPlayers;
+    Queue<std::shared_ptr<Player>> m_deadPlayers;
     int m_roundsPlayed;
     void readCards(const std::string& fileName);
     void initPlayers();
@@ -87,7 +92,7 @@ private:
      * loss if player hp hit 0
      * midgame otherwise
      */
-    void updatePlayerStatus(SmartPtr<Player> player);
+    void updatePlayerStatus(std::shared_ptr<Player> player);
 };
 
 

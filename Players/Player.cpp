@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "utilities.h"
-
-static const int MAX_NAME_LENGTH = 15;
+#include "Exception.h"
 
 static bool isNotNegative(const int value){
     return (value>=0);
@@ -11,26 +10,13 @@ static int zeroNegativeNumbers(const int value){
     return (value > 0 ? value : 0);
 }
 
-static bool isLegitName(const std::string& name){
-    int nameLength = name.size();
-    if(nameLength > MAX_NAME_LENGTH){
-        return false;
-    }
-    for(int i=0; i < nameLength; i++){
-        if(!isalpha(name[i])){
-            return false;
-        }
-    }
-    return true;
-}
-
 Player::Player(const std::string name) :  m_level(STARTING_LEVEL), m_force(DEFAULT_FORCE),
                                     m_maxHP(DEFAULT_MAXHP), m_HP(DEFAULT_MAXHP), m_coins(STARTING_COINS)
 {
-    if(isLegitName(name)){
+    if(isValidName(name)){
         m_name = name;
     }else
-        throw 5; //add trhow
+        throw InvalidName(); //add trhow
 }
 
 std::ostream& operator<<(std::ostream& os,const Player& player){
@@ -89,10 +75,11 @@ int Player::getAttackStrength() const{
     return m_level + m_force ;
 }
 void Player::weaken() {
-    m_force -= 1;
+    if(m_force > 0)
+        m_force -= 1;
 }
 void Player::strengthen() {
-    m_force -= 1;
+    m_force += 1;
 }
 
 

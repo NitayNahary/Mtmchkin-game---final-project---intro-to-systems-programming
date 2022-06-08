@@ -2,10 +2,10 @@
 #include "Merchant.h"
 
 void Merchant::applyEncounter(Player &player) {
-    printMerchantInitialMessageForInteractiveEncounter(std::cout, player.getName(), player.getCoins());
     m_buyerName = player.getName();
-    getIntInputNumber(m_buy, 0, 2);
-    bool hadMoney;
+    printMerchantInitialMessageForInteractiveEncounter(std::cout, m_buyerName, player.getCoins());
+    getIntInputNumber(m_buy, SELL_START_INPUT_RANGE, SELL_END_INPUT_RANGE);
+    bool hadMoney = false;
     switch(m_buy){
         case M_BUY_FORCE:
             if(player.pay(M_FORCE_COST)){
@@ -23,7 +23,7 @@ void Merchant::applyEncounter(Player &player) {
             hadMoney = true;
             break;
         default:
-            //throw
+            throw GeneralError(); // general error unknown
             ;
     }
     if(!hadMoney) {
@@ -32,16 +32,15 @@ void Merchant::applyEncounter(Player &player) {
 }
 
 void Merchant::printInfo(std::ostream& os) const {
-    int spent = 0;
     switch(m_buy){
         case M_BUY_FORCE:
-            spent = M_FORCE_COST;
+            printMerchantSummary(os, m_buyerName, m_buy, M_FORCE_COST);
             break;
         case M_BUY_HP:
-            spent = M_HP_COST;
+            printMerchantSummary(os, m_buyerName, m_buy, M_HP_COST);
             break;
         default:
-            ;
+            printMerchantSummary(os, m_buyerName, m_buy, M_BUY_NOTHING);
     }
-    // printMerchantSummary(os, m_buyerName, m_buy, spent);
+
 }

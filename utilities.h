@@ -7,9 +7,11 @@
 #include <sstream>
 #include <functional>
 
-//#include "Exception.h"
-#include "Players/Player.h"
+#include "Exception.h"
 
+#define BUFFER_SIZE 256
+#include "Players/Player.h"
+#define MAX_NAME_LEGTH 15
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -138,7 +140,7 @@ void printTreasureMessage();
  *      void
  *
  */
-//void printMerchantSummary(ostream &os, string playerName, int type, int cost);
+void printMerchantSummary(std::ostream &os, std::string playerName, int type, int cost);
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -264,4 +266,9 @@ void printEnterTeamSizeMessage();
 /* ---------------------------------------------------------------------------------------------- */
 
 void getIntInputNumber(int& dest, int startOfRange = -INT_MAX, int endOfRange = INT_MAX , void invalidError() = printInvalidInput);
+
+void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
+
+bool isValidName(const std::string& name);
+
 #endif //CPP_SHIT_UTIL_H

@@ -14,7 +14,7 @@ static const std::map<std::string, PlayerClass> CLASS_LEXICON = {{"Rogue",   Pla
                                                           {"Wizard",  PlayerClass::Wizard},
                                                           {"Fighter", PlayerClass::Fighter}};
 
-static bool isActive(SmartPtr<Player> player){
+static bool isActive(std::shared_ptr<Player> player){
     if(player->isKnockedOut() || player->getLevel() == WIN_CONDITION){
         return false;
     }
@@ -30,17 +30,32 @@ Mtmchkin::Mtmchkin(const std::string fileName){
 
 void Mtmchkin::readCards(const std::string& fileName){
     FILE* source = fopen(fileName.c_str(), "r");
+    if(source == nullptr){
+        throw DeckFileNotFound();
+    }
+    int line = 1, deckSize = 0;
     char buffer[BUFFER_SIZE] = {'\0'};
-    while(fgets(buffer,BUFFER_SIZE,source) != NULL) {
-        if(buffer[15] != 0){ //define 15 as max length of card name
-            //throw
+    while(fgets(buffer,BUFFER_SIZE,source) != nullptr) {
+        int lastChar = strlen(buffer)-1;
+        if(buffer[lastChar] == '\n'){
+            buffer[lastChar] = '\0';
         }
-        if(buildMyCard(buffer) == -1){
-            //handle
+        if(!isValidName(buffer)){
+            throw DeckFileFormatError(line);
+        }
+        if(buildMyCard(buffer) == NOT_FOUND){
+            throw DeckFileFormatError(line);
+        }
+        else{
+            deckSize++;
         }
         for(int i =0; i < BUFFER_SIZE; i++){
             buffer[i] = '\0';
         }
+        line++;
+    }
+    if(deckSize < MIN_DECK_SIZE){
+        throw DeckFileInvalidSize();
     }
     fclose(source);
 }
@@ -66,7 +81,7 @@ void Mtmchkin::readCards(const std::string& fileName){
 
 void Mtmchkin::initPlayers(){
     int numberOfPlayers;
-    getIntInputNumber(numberOfPlayers, 2, 6, printInvalidTeamSize);
+    getIntInputNumber(numberOfPlayers, MIN_PLAYERS, MAX_PLAYERS, printInvalidTeamSize);
     bool badInput = false;
     for(int i = 0; i < numberOfPlayers; i++){
         std::string input;
@@ -74,7 +89,7 @@ void Mtmchkin::initPlayers(){
             printInsertPlayerMessage();
         }
         badInput = false;
-        std::cin >> input;
+        getStringInput(input);
         int spaceIndex = input.find_first_of(' ');
         int rawInputLength = input.length();
         std::string name, playerType;
@@ -85,15 +100,15 @@ void Mtmchkin::initPlayers(){
             badInput = true;
         }
         else{
-            //try{
-                if(buildMyPlayer(playerType, name) == -1){
+            try{
+                if(buildMyPlayer(playerType, name) == NOT_FOUND){
                     printInvalidClass();
                     badInput = true;
-              //  }
-            }//catch(Player::Bad_Name a){
-              //  printInvalidName();
-            //    badInput = true;
-           // }
+                }
+            }catch(...){
+                printInvalidName();
+                badInput = true;
+            }
         }
         if(badInput){
             i--;
@@ -102,59 +117,64 @@ void Mtmchkin::initPlayers(){
 }
 
 int Mtmchkin::buildMyPlayer(const std::string& playerType , const std::string& name){
-    SmartPtr<Player> player;
-    switch (CLASS_LEXICON.at(playerType)){
-        case PlayerClass::Wizard:
-            player = new Wizard(name);
-            break;
-        case PlayerClass::Rogue:
-            player = new Rouge(name);
-            break;
-        case PlayerClass::Fighter:
-            player = new Fighter(name);
-            break;
-        default:
-            return -1;
+    try{
+        switch (CLASS_LEXICON.at(playerType)){
+            case PlayerClass::Wizard:
+                m_activePlayers.pushBack(std::shared_ptr<Player>(new Wizard(name)));
+                break;
+                case PlayerClass::Rogue:
+                    m_activePlayers.pushBack(std::shared_ptr<Player>(new Rogue(name)));
+                    break;
+                    case PlayerClass::Fighter:
+                        m_activePlayers.pushBack(std::shared_ptr<Player>(new Fighter(name)));
+                        break;
+                        default:
+                            return NOT_FOUND;
+        }
+    }catch(std::out_of_range& a){
+        return NOT_FOUND;
     }
-    m_activePlayers.pushBack(player);
-    return 1;
+    return FOUND;
 }
 
 int Mtmchkin::buildMyCard(const std::string& cardTypeIndex){
-    SmartPtr<Card> card;
-    switch (CARD_LEXICON.at(cardTypeIndex)){
-        case CardTypes::Barfight:
-            card = new Barfight();
-            break;
-        case CardTypes::Dragon:
-            card = new Dragon();
-            break;
-        case CardTypes::Fairy:
-            card = new Fairy();
-            break;
-        case CardTypes::Goblin:
-            card = new Goblin();
-            break;
-        case CardTypes::Merchant:
-            card = new Merchant();
-            break;
-        case CardTypes::Pitfall:
-            card = new Pitfall();
-            break;
-        case CardTypes::Treasure:
-            card = new Treasure();
-            break;
-        case CardTypes::Vampire:
-            card = new Vampire();
-            break;
-        default:
-            return -1;
+    try{
+        switch (CARD_LEXICON.at(cardTypeIndex)){
+            case CardTypes::Barfight:
+                m_deck.pushBack(std::shared_ptr<Card>(new Barfight()));
+                break;
+                case CardTypes::Dragon:
+                    m_deck.pushBack(std::shared_ptr<Card>(new Dragon()));
+                    break;
+                    case CardTypes::Fairy:
+                        m_deck.pushBack(std::shared_ptr<Card>(new Fairy()));
+                        break;
+                        case CardTypes::Goblin:
+                            m_deck.pushBack(std::shared_ptr<Card>(new Goblin()));
+                            break;
+                            case CardTypes::Merchant:
+                                m_deck.pushBack(std::shared_ptr<Card>(new Merchant()));
+                                break;
+                                case CardTypes::Pitfall:
+                                    m_deck.pushBack(std::shared_ptr<Card>(new Pitfall()));
+                                    break;
+                                    case CardTypes::Treasure:
+                                        m_deck.pushBack(std::shared_ptr<Card>(new Treasure()));
+                                        break;
+                                        case CardTypes::Vampire:
+                                            m_deck.pushBack(std::shared_ptr<Card>(new Vampire()));
+                                            break;
+                                            default:
+                                                return NOT_FOUND;
+        }
+    }catch(std::out_of_range& a){
+        return NOT_FOUND;
     }
-    m_deck.pushBack(card);
-    return 1;
+
+    return FOUND;
 }
 
-void Mtmchkin::updatePlayerStatus(SmartPtr<Player> player){
+void Mtmchkin::updatePlayerStatus(std::shared_ptr<Player> player){
     if(player->isKnockedOut()){
         m_deadPlayers.push(player);
     }else if(player->getLevel() == WIN_CONDITION){
@@ -166,10 +186,11 @@ void Mtmchkin::updatePlayerStatus(SmartPtr<Player> player){
 
 void Mtmchkin::playRound(){
     printRoundStartMessage(m_roundsPlayed);
-    for(SmartPtr<Player> player : m_activePlayers){
+    for(std::shared_ptr<Player> player : m_activePlayers){
         printTurnStartMessage(player->getName());
-        SmartPtr<Card> playingCard = m_deck.front();
+        std::shared_ptr<Card> playingCard = m_deck.front();
         playingCard->applyEncounter(*player);
+        std::cout << *playingCard << std::endl;
         updatePlayerStatus(player);
         m_deck.popFront();
         m_deck.pushBack(playingCard);
@@ -195,15 +216,15 @@ int Mtmchkin::getNumberOfRounds() const {
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     int i = 1;
-    for(SmartPtr<Player> player : m_winPlayers){
+    for(std::shared_ptr<Player> player : m_winPlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }
-    for(SmartPtr<Player> player : m_activePlayers){
+    for(std::shared_ptr<Player> player : m_activePlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }
-    for(SmartPtr<Player> player : m_deadPlayers){
+    for(std::shared_ptr<Player> player : m_deadPlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }

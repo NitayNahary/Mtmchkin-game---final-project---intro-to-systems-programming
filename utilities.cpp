@@ -122,7 +122,7 @@ void printMerchantSummary(ostream &os, string playerName, int type, int cost)
 {
     os << playerName << " has paid " << cost << " coins ";
     if(type != 0){
-        os << "for ";;
+        os << "for ";
     }
 
     if(type == 1){
@@ -219,7 +219,7 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
 
         while (std::cin.fail() || std::cin.eof() || theInput.find_first_not_of("0123456789") != std::string::npos) {
             if(std::cin.eof()){
-                //throw
+                throw EndOfFile();
             }
             invalidError();
 
@@ -234,4 +234,27 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
         inputAsInt = std::stoi(theInput, &st);
     } while (inputAsInt < startOfRange || inputAsInt > endOfRange);
     dest = inputAsInt;
+}
+void getStringInput(string& dest, void invalidError()){
+    std::string theInput;
+    if(std::cin.eof()){
+        throw EndOfFile();
+    }
+    std::getline(std::cin, theInput);
+    while(std::cin.fail()) {
+        invalidError();
+        std::getline(std::cin, theInput);
+    }
+    dest = theInput;
+}
+bool isValidName(const std::string& name){
+    if(name.size() > MAX_NAME_LEGTH){
+        return false;
+    }
+    for(int i=0; i < name.size(); i++){
+        if(name[i] < 'A' || (name[i] > 'Z' && name[i] <'a') || name[i] > 'z'){
+            return false;
+        }
+    }
+    return true;
 }
