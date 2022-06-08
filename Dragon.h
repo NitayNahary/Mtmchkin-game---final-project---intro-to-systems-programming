@@ -9,7 +9,7 @@ public:
     void printInfo(std::ostream& os) const override;
 
 private:
-    static const int m_force = 25;
+    static const int m_force = 40;
     static const int m_loot = 1000 ;
     static const int m_damage = 1000000;
     const bool m_isDragon = true;
