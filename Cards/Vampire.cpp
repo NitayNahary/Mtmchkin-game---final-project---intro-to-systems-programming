@@ -15,6 +15,6 @@ void Vampire::applyEncounter(Player& player){
     }
 }
 
-void Vampire::printInfo() const {
-    printMonsterDetails(std::cout,m_force,m_damage, m_loot, m_isDragon);
+void Vampire::printInfo(std::ostream& os) const {
+    printMonsterDetails(os,m_force,m_damage, m_loot, m_isDragon);
 }

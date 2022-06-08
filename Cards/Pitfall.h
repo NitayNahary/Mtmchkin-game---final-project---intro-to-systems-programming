@@ -1,7 +1,6 @@
 
 #ifndef HW4_PITFALL_H
 #define HW4_PITFALL_H
-
 #include "Card.h"
 
 class Pitfall : public Card{

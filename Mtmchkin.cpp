@@ -1,6 +1,5 @@
 
 #include "Mtmchkin.h"
-#include "Classes/Player.h"
 
 const std::map<std::string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
                                                        {"Dragon",   CardTypes::Dragon},
@@ -97,15 +96,15 @@ void Mtmchkin::initPlayers(){
             badInput = true;
         }
         else{
-            try{
+            //try{
                 if(buildMyPlayer(playerType, name) == -1){
                     printInvalidClass();
                     badInput = true;
-                }
-            }catch(Player::Bad_Name a){
-                printInvalidName();
-                badInput = true;
-            }
+              //  }
+            }//catch(Player::Bad_Name a){
+              //  printInvalidName();
+            //    badInput = true;
+           // }
         }
         if(badInput){
             i--;

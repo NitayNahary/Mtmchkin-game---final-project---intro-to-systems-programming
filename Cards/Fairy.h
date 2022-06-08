@@ -2,8 +2,6 @@
 #ifndef HW4_FAIRY_H
 #define HW4_FAIRY_H
 #include "Card.h"
-#include <map>
-#include "utilities.h"
 
 class Fairy : public Card {
 public:

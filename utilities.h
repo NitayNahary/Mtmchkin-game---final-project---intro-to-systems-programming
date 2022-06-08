@@ -8,7 +8,7 @@
 #include <functional>
 
 //#include "Exception.h"
-#include "Classes/Player.h"
+#include "Players/Player.h"
 
 
 /* ---------------------------------------------------------------------------------------------- */

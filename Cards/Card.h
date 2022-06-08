@@ -2,8 +2,9 @@
 #define EX4_Card_H
 
 #include <string>
+#include <iostream>
 #include "utilities.h"
-#include "Classes/Player.h"
+#include "Players/Player.h"
 class Card {
 
 public:

@@ -1,7 +1,7 @@
-#include "Card.h"
+
 #ifndef HW4_BARFIGHT_H
 #define HW4_BARFIGHT_H
-
+#include "Card.h"
 
 class Barfight : public Card{
 public:

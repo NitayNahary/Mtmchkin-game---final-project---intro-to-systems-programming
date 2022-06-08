@@ -1,7 +1,6 @@
 #ifndef HW4_PLAYER_H
 #define HW4_PLAYER_H
 
-#include "utilities.h"
 #include <string>
 using std::string;
 class Player{

@@ -1,7 +1,6 @@
 
 #ifndef HW4_GOBLIN_H
 #define HW4_GOBLIN_H
-
 #include "Card.h"
 
 class Goblin : public Card{

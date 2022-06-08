@@ -1,13 +1,11 @@
 #ifndef HW4_VAMPIRE_H
 #define HW4_VAMPIRE_H
-
 #include "Card.h"
-#include "Classes/Player.h"
 
 class Vampire : public Card{
 public:
     void applyEncounter(Player& player) override;
-    void printInfo() const override = 0;
+    void printInfo(std::ostream& os) const override;
     ~Vampire() override = default;
 
 private:

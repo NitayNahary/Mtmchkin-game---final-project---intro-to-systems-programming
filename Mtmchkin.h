@@ -6,7 +6,7 @@
 #include <iostream>
 
 #include "Cards/Card.h"
-#include "Classes/Player.h"
+#include "Players/Player.h"
 #include "Cards/Barfight.h"
 #include "Cards/Dragon.h"
 #include "Cards/Fairy.h"
@@ -15,9 +15,9 @@
 #include "Cards/Vampire.h"
 #include "Cards/Pitfall.h"
 #include "Cards/Treasure.h"
-#include "Classes/Fighter.h"
-#include "Classes/Wizard.h"
-#include "Classes/Rouge.h"
+#include "Players/Fighter.h"
+#include "Players/Wizard.h"
+#include "Players/Rouge.h"
 
 #include "Queue.h"
 #include "utilities.h"

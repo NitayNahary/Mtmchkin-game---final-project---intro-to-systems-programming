@@ -1,6 +1,5 @@
 #ifndef HW4_DRAGON_H
 #define HW4_DRAGON_H
-
 #include "Card.h"
 
 class Dragon : public Card{
