@@ -43,7 +43,4 @@ class EndOfFile : public exception{
     }
 };
 
-
-
-
 #endif //HW4_EXCEPTION_H
