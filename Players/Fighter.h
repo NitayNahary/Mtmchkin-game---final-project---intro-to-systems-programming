@@ -6,14 +6,14 @@
 
 class Fighter : public Player {
 public:
-    explicit Fighter(const char* name);
+    explicit Fighter(const  std::string name);
     Fighter& operator=(const Fighter& src) = default;
     Fighter(const Fighter& src) = default;
     ~Fighter() override = default;
 
 //--------------------------------------------------------------------------------------------------------------------//
     int getAttackStrength() const override;
-    string getClass() const override;
+    std::string getClass() const override;
 
 };
 

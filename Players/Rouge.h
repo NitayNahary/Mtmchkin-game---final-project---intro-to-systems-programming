@@ -6,14 +6,14 @@
 
 class Rouge : public Player {
 public:
-    explicit Rouge(const char* name);
+    explicit Rouge(const std::string name);
     Rouge& operator=(const Rouge& src) = default;
     Rouge(const Rouge& src) = default;
     ~Rouge() override = default;
 
 //--------------------------------------------------------------------------------------------------------------------//
     void addCoins(const int coinUp) override;
-    string getClass() const override;
+    std::string getClass() const override;
 
 };
 

@@ -1,11 +1,10 @@
 #include "Fighter.h"
-#include <ostream>
 
-Fighter::Fighter(const char *name)  : Player(name){}
+Fighter::Fighter(const std::string name)  : Player(name){}
 
 int Fighter::getAttackStrength() const{
     return m_level + (2 * m_force) ;
 }
-string Fighter::getClass() const {
+std::string Fighter::getClass() const {
     return "Fighter";
 }

@@ -1,5 +1,4 @@
 #include "Player.h"
-#include <string.h>
 #include "utilities.h"
 
 static const int MAX_NAME_LENGTH = 15;
@@ -12,22 +11,21 @@ static int zeroNegativeNumbers(const int value){
     return (value > 0 ? value : 0);
 }
 
-static bool isLegitName(const char* name){
-    int nameLength = strlen(name);
+static bool isLegitName(const std::string& name){
+    int nameLength = name.size();
     if(nameLength > MAX_NAME_LENGTH){
         return false;
     }
-    while(*name){
-        if(!isalpha(*name)){
+    for(int i=0; i < nameLength; i++){
+        if(!isalpha(name[i])){
             return false;
         }
-        name++;
     }
     return true;
 }
 
-Player::Player(const char* name) :  m_level(STARTING_LEVEL), m_force(DEFAULT_FORCE),
-                                    m_maxHP(DEFAULT_MAXHP), m_HP(m_maxHP), m_coins(STARTING_COINS)
+Player::Player(const std::string name) :  m_level(STARTING_LEVEL), m_force(DEFAULT_FORCE),
+                                    m_maxHP(DEFAULT_MAXHP), m_HP(DEFAULT_MAXHP), m_coins(STARTING_COINS)
 {
     if(isLegitName(name)){
         m_name = name;
@@ -36,11 +34,11 @@ Player::Player(const char* name) :  m_level(STARTING_LEVEL), m_force(DEFAULT_FOR
 }
 
 std::ostream& operator<<(std::ostream& os,const Player& player){
-    string job = player.getClass();
+    std::string job = player.getClass();
     printPlayerDetails(os,player.m_name,job,player.m_level,player.m_force,player.m_HP,player.m_coins);
     return os;
 }
-string Player::getName(){
+std::string Player::getName(){
     return m_name;
 }
 

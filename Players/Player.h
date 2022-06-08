@@ -2,7 +2,6 @@
 #define HW4_PLAYER_H
 
 #include <string>
-using std::string;
 class Player{
 public:
     static const int DEFAULT_FORCE = 5;
@@ -23,7 +22,7 @@ public:
                      @return
                             An instance of Player
 */
-    explicit Player(const char* name);
+    explicit Player(const std::string name);
 
 //  Copy-Assigment C'tor, Copy C'tor, D'tor - defaulted as string already handles memory, copy and copy-assignment.
     Player& operator=(const Player& src) = default;
@@ -35,7 +34,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os,const Player& player);
 
     //get the name of the player
-    string getName();
+    std::string getName();
 
     //get the amount of coins the player have
     int getCoins();
@@ -79,12 +78,12 @@ public:
 
     void strengthen();
 
-    virtual string getClass() const = 0;
+    virtual std::string getClass() const = 0;
 
 
 //----------------------------PLAYER STATS---------------------------------
 private:
-    string m_name; // player name
+    std::string m_name; // player name
 
 protected:
     int m_level; // player level
