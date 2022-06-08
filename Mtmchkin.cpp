@@ -1,7 +1,7 @@
 
 #include "Mtmchkin.h"
 
-const std::map<std::string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
+static const std::map<std::string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
                                                        {"Dragon",   CardTypes::Dragon},
                                                        {"Fairy",    CardTypes::Fairy},
                                                        {"Goblin",   CardTypes::Goblin},
@@ -10,11 +10,11 @@ const std::map<std::string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::B
                                                        {"Pitfall",  CardTypes::Pitfall},
                                                        {"Vampire",  CardTypes::Vampire}};
 
-const std::map<std::string, PlayerClass> CLASS_LEXICON = {{"Rogue",   PlayerClass::Rogue},
+static const std::map<std::string, PlayerClass> CLASS_LEXICON = {{"Rogue",   PlayerClass::Rogue},
                                                           {"Wizard",  PlayerClass::Wizard},
                                                           {"Fighter", PlayerClass::Fighter}};
 
-static bool isActive(const Player* player){
+static bool isActive(SmartPtr<Player> player){
     if(player->isKnockedOut() || player->getLevel() == WIN_CONDITION){
         return false;
     }
@@ -62,18 +62,7 @@ void Mtmchkin::readCards(const std::string& fileName){
 //    }
 //    return num;
 //}
-//
-//static bool isValidName(const std::string& name){
-//    if(name.size() > 15){
-//        return false;
-//    }
-//    for(char letter : name){
-//        if(letter < 'A' || (letter > 'Z' && letter < 'a') || letter > 'z'){
-//            return false;
-//        }
-//    }
-//    return true;
-//}
+
 
 void Mtmchkin::initPlayers(){
     int numberOfPlayers;
@@ -113,55 +102,59 @@ void Mtmchkin::initPlayers(){
 }
 
 int Mtmchkin::buildMyPlayer(const std::string& playerType , const std::string& name){
+    SmartPtr<Player> player;
     switch (CLASS_LEXICON.at(playerType)){
         case PlayerClass::Wizard:
-            m_activePlayers.pushBack(&Wizard(name));
+            player = new Wizard(name);
             break;
         case PlayerClass::Rogue:
-            m_activePlayers.pushBack(&Rouge(name));
+            player = new Rouge(name);
             break;
         case PlayerClass::Fighter:
-            m_activePlayers.pushBack(&Fighter(name));
+            player = new Fighter(name);
             break;
         default:
             return -1;
     }
+    m_activePlayers.pushBack(player);
     return 1;
 }
 
 int Mtmchkin::buildMyCard(const std::string& cardTypeIndex){
+    SmartPtr<Card> card;
     switch (CARD_LEXICON.at(cardTypeIndex)){
         case CardTypes::Barfight:
-            m_deck.pushBack(&Barfight());
+            card = new Barfight();
             break;
         case CardTypes::Dragon:
-            m_deck.pushBack(&Dragon());
+            card = new Dragon();
             break;
         case CardTypes::Fairy:
-            m_deck.pushBack(&Fairy());
+            card = new Fairy();
             break;
         case CardTypes::Goblin:
-            m_deck.pushBack(&Goblin());
+            card = new Goblin();
             break;
         case CardTypes::Merchant:
-            m_deck.pushBack(&Merchant());
+            card = new Merchant();
             break;
         case CardTypes::Pitfall:
-            m_deck.pushBack(&Pitfall());
+            card = new Pitfall();
             break;
         case CardTypes::Treasure:
-            m_deck.pushBack(&Treasure());
+            card = new Treasure();
             break;
         case CardTypes::Vampire:
-            m_deck.pushBack(&Vampire());
+            card = new Vampire();
             break;
         default:
             return -1;
     }
+    m_deck.pushBack(card);
     return 1;
 }
 
-void Mtmchkin::updatePlayerStatus(Player *const  player){
+void Mtmchkin::updatePlayerStatus(SmartPtr<Player> player){
     if(player->isKnockedOut()){
         m_deadPlayers.push(player);
     }else if(player->getLevel() == WIN_CONDITION){
@@ -173,9 +166,9 @@ void Mtmchkin::updatePlayerStatus(Player *const  player){
 
 void Mtmchkin::playRound(){
     printRoundStartMessage(m_roundsPlayed);
-    for(Player* player : m_activePlayers){
+    for(SmartPtr<Player> player : m_activePlayers){
         printTurnStartMessage(player->getName());
-        Card* playingCard = m_deck.front();
+        SmartPtr<Card> playingCard = m_deck.front();
         playingCard->applyEncounter(*player);
         updatePlayerStatus(player);
         m_deck.popFront();
@@ -202,15 +195,15 @@ int Mtmchkin::getNumberOfRounds() const {
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     int i = 1;
-    for(const Player* player : m_winPlayers){
+    for(SmartPtr<Player> player : m_winPlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }
-    for(const Player* player : m_activePlayers){
+    for(SmartPtr<Player> player : m_activePlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }
-    for(const Player* player : m_deadPlayers){
+    for(SmartPtr<Player> player : m_deadPlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }
