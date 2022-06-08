@@ -2,7 +2,7 @@
 #define HW4_VAMPIRE_H
 
 #include "Card.h"
-#include "Player.h"
+#include "Classes/Player.h"
 
 class Vampire : public Card{
 public:

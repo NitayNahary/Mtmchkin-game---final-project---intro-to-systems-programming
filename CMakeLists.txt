@@ -9,4 +9,4 @@ add_executable(HW4
         Mtmchkin.h
         test.cpp
         utilities.cpp
-        utilities.h Player.cpp Player.h Fighter.h Fighter.cpp Wizard.cpp Wizard.h Rogue.cpp Rouge.h Card.h Vampire.cpp Vampire.h Goblin.cpp Goblin.h Dragon.cpp Dragon.h Exception.h main.cpp Mtmchkin.cpp Queue.h Barfight.cpp Barfight.h Card.cpp Fairy.cpp Fairy.h Merchant.cpp Merchant.h Pitfall.cpp Pitfall.h Treasure.cpp Treasure.h)
+        utilities.h Classes/Player.cpp Classes/Player.h Classes/Fighter.h Classes/Fighter.cpp Classes/Wizard.cpp Classes/Wizard.h Classes/Rouge.cpp Classes/Rouge.h Cards/Card.h Cards/Vampire.cpp Cards/Vampire.h Cards/Goblin.cpp Cards/Goblin.h Cards/Dragon.cpp Cards/Dragon.h Exception.h main.cpp Mtmchkin.cpp Queue.h Cards/Barfight.cpp Cards/Barfight.h Cards/Card.cpp Cards/Fairy.cpp Cards/Fairy.h Cards/Merchant.cpp Cards/Merchant.h Cards/Pitfall.cpp Cards/Pitfall.h Cards/Treasure.cpp Cards/Treasure.h)

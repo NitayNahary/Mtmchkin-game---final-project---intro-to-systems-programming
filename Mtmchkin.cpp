@@ -1,6 +1,6 @@
 
 #include "Mtmchkin.h"
-#include "Player.h"
+#include "Classes/Player.h"
 
 const std::map<std::string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
                                                        {"Dragon",   CardTypes::Dragon},
@@ -15,8 +15,8 @@ const std::map<std::string, PlayerClass> CLASS_LEXICON = {{"Rogue",   PlayerClas
                                                           {"Wizard",  PlayerClass::Wizard},
                                                           {"Fighter", PlayerClass::Fighter}};
 
-static bool isActive(const Player& player){
-    if(player.isKnockedOut() || player.getLevel() == WIN_CONDITION){
+static bool isActive(const Player* player){
+    if(player->isKnockedOut() || player->getLevel() == WIN_CONDITION){
         return false;
     }
     return true;
@@ -119,7 +119,7 @@ int Mtmchkin::buildMyPlayer(const std::string& playerType , const std::string& n
             m_activePlayers.pushBack(&Wizard(name));
             break;
         case PlayerClass::Rogue:
-            m_activePlayers.pushBack(&Rogue(name));
+            m_activePlayers.pushBack(&Rouge(name));
             break;
         case PlayerClass::Fighter:
             m_activePlayers.pushBack(&Fighter(name));

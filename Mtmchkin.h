@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 
-#include "Cards/Cards.h"
+#include "Cards/Card.h"
 #include "Classes/Player.h"
 #include "Cards/Barfight.h"
 #include "Cards/Dragon.h"

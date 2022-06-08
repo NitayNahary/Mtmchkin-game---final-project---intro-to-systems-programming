@@ -1,7 +1,7 @@
 
 #ifndef HW4_MERCHANT_H
 #define HW4_MERCHANT_H
-#include "Card.h"
+#include "Cards/Card.h"
 #include <iostream>
 
 class Merchant : public Card {
