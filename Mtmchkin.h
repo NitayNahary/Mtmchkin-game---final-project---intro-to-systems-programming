@@ -6,7 +6,6 @@
 #include <iostream>
 
 #include "Cards/Card.h"
-#include "Players/Player.h"
 #include "Cards/Barfight.h"
 #include "Cards/Dragon.h"
 #include "Cards/Fairy.h"
@@ -15,11 +14,14 @@
 #include "Cards/Vampire.h"
 #include "Cards/Pitfall.h"
 #include "Cards/Treasure.h"
+
+#include "Players/Player.h"
 #include "Players/Fighter.h"
 #include "Players/Wizard.h"
 #include "Players/Rouge.h"
 
 #include "Queue.h"
+#include "SmartPtr.h"
 #include "utilities.h"
 
 #define BUFFER_SIZE 17
@@ -69,10 +71,10 @@ public:
 
 
 private:
-    Queue<Card*> m_deck;
-    Queue<Player*> m_activePlayers;
-    Queue<Player*> m_winPlayers;
-    Queue<Player*> m_deadPlayers;
+    Queue<SmartPtr<Card>> m_deck;
+    Queue<SmartPtr<Player>> m_activePlayers;
+    Queue<SmartPtr<Player>> m_winPlayers;
+    Queue<SmartPtr<Player>> m_deadPlayers;
     int m_roundsPlayed;
     void readCards(const std::string& fileName);
     void initPlayers();
@@ -85,10 +87,7 @@ private:
      * loss if player hp hit 0
      * midgame otherwise
      */
-    void updatePlayerStatus(Player *const player);
-    static const std::map<std::string, CardTypes> CARD_LEXICON;
-    static const std::map<std::string, PlayerClass> CLASS_LEXICON;
-
+    void updatePlayerStatus(SmartPtr<Player> player);
 };
 
 
