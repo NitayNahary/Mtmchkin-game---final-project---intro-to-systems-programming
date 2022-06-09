@@ -5,15 +5,15 @@
 #include <string>
 #include <iostream>
 
-#include "Cards/Card.h"
-#include "Cards/Barfight.h"
-#include "Cards/Dragon.h"
-#include "Cards/Fairy.h"
-#include "Cards/Goblin.h"
-#include "Cards/Merchant.h"
-#include "Cards/Vampire.h"
-#include "Cards/Pitfall.h"
-#include "Cards/Treasure.h"
+#include "Cards/nonBattleMonsters/Card.h"
+#include "Cards/nonBattleMonsters/Barfight.h"
+#include "Cards/battleMonsters/Dragon.h"
+#include "Cards/nonBattleMonsters/Fairy.h"
+#include "Cards/battleMonsters/Goblin.h"
+#include "Cards/nonBattleMonsters/Merchant.h"
+#include "Cards/battleMonsters/Vampire.h"
+#include "Cards/nonBattleMonsters/Pitfall.h"
+#include "Cards/nonBattleMonsters/Treasure.h"
 
 #include "Players/Player.h"
 #include "Players/Fighter.h"
@@ -39,7 +39,7 @@ static const int WIN_CONDITION = 10;
 
 class Mtmchkin {
 public:
-    Mtmchkin(const std::string fileName);
+    explicit Mtmchkin(const std::string& fileName);
     /*
     * Play the next Round of the game - according to the instruction in the exercise document.
     *

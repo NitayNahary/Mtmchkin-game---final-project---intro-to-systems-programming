@@ -5,6 +5,7 @@ void Merchant::applyEncounter(Player &player) {
     m_buyerName = player.getName();
     printMerchantInitialMessageForInteractiveEncounter(std::cout, m_buyerName, player.getCoins());
     getIntInputNumber(m_buy, SELL_START_INPUT_RANGE, SELL_END_INPUT_RANGE);
+
     bool hadMoney = false;
     switch(m_buy){
         case M_BUY_FORCE:
@@ -29,6 +30,7 @@ void Merchant::applyEncounter(Player &player) {
     if(!hadMoney) {
         printMerchantInsufficientCoins(std::cout);
     }
+    printInfo(std::cout);
 }
 
 void Merchant::printInfo(std::ostream& os) const {

@@ -5,16 +5,16 @@
 #include <vector>
 #include <memory>
 #include "Players/Player.h"
-#include "Cards/Card.h"
+#include "Cards/nonBattleMonsters/Card.h"
 #include "Mtmchkin.h"
-#include "Cards/Vampire.h"
-#include "Cards/Barfight.h"
-#include "Cards/Dragon.h"
-#include "Cards/Fairy.h"
-#include "Cards/Goblin.h"
-#include "Cards/Merchant.h"
-#include "Cards/Pitfall.h"
-#include "Cards/Treasure.h"
+#include "Cards/battleMonsters/Vampire.h"
+#include "Cards/nonBattleMonsters/Barfight.h"
+#include "Cards/battleMonsters/Dragon.h"
+#include "Cards/nonBattleMonsters/Fairy.h"
+#include "Cards/battleMonsters/Goblin.h"
+#include "Cards/nonBattleMonsters/Merchant.h"
+#include "Cards/nonBattleMonsters/Pitfall.h"
+#include "Cards/nonBattleMonsters/Treasure.h"
 #include "Players/Rogue.h"
 #include "Players/Wizard.h"
 #include "Players/Fighter.h"
@@ -54,8 +54,12 @@ void deleteTextFile(const string &filename)
 bool compareFiles(const string &filename1, const string &filename2)
 {
     string line1,line2;
-    fstream file1(filename1),file2(filename2);
-    if( !file2){
+    fstream file1(filename1);
+    fstream file2(filename2);
+    if(file2.fail()){
+        cerr<<"Error opening file 2 for no reason"<<std::endl;
+    }
+    if(!file2){
         cerr<<"Error opening file 2"<<std::endl;
         return false;
     }
@@ -239,7 +243,7 @@ bool badPlayerInputTest()
 bool merchantInputTest()
 {
     const string tmp_file("merchantInput_test");
-    string input("2\nmatamDalf Wizardd\nmatamDalf rogoe\nmatamDalf Wizard\nrocky Fighter"
+    string input("2\nmatamDalf Wizardd\nmatamDalf rogoe\nmatamDalf Wizard\nrocky Fighter\n"
                  "1\n"
                  "1\n"
                  "0\n"
@@ -326,7 +330,6 @@ bool badFormatStartTest()
 // --------------------------------       Main function          ------------------------------
 
 int main(){
-
     run_test(cardsPrintsTest,"cardsPrintsTest");
     run_test(testCard,"Deck creation test");
     run_test(dragonDenTest,"Dragon Den simulation test");

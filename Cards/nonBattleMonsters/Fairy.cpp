@@ -6,6 +6,7 @@ void Fairy::applyEncounter(Player &player){
     if(m_isWizard){
         player.heal(M_EFFECT_VALUE);
     }
+    printInfo(std::cout);
 }
 
 void Fairy::printInfo(std::ostream& os) const {

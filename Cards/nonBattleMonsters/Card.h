@@ -6,7 +6,7 @@
 #include "utilities.h"
 #include "Players/Player.h"
 class Card {
-
+    virtual void printInfo(std::ostream& os) const = 0;
 public:
     virtual void applyEncounter(Player& player) = 0;
     /*
@@ -15,11 +15,11 @@ public:
      * @return
      *      void
     */
-    virtual void printInfo(std::ostream& os) const = 0;
+    friend std::ostream& operator<<(std::ostream& os,const Card& card);
     virtual ~Card() = default;
 };
 
 
-std::ostream& operator<<(std::ostream& os,const Card& card);
+
 
 #endif //EX4_Card_H
