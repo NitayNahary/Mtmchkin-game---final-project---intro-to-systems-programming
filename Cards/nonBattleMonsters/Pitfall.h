@@ -14,20 +14,15 @@ public:
     */
     void applyEncounter(Player &player) override;
 
-
+private:
     /*
      * Prints the card info:
      *
      * @return
      *      void
     */
-
-
-    /*
-     * Here we are explicitly telling the compiler to use the default methods
-    */
-private:
     void printInfo(std::ostream& os) const override;
+
     static const int M_EFFECT_VALUE = 10;
     bool m_isRogue;
 };

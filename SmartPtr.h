@@ -1,6 +1,3 @@
-//
-// Created by shach on 6/8/2022.
-//
 
 #ifndef HW4_SMARTPTR_H
 #define HW4_SMARTPTR_H
