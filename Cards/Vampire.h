@@ -1,6 +1,6 @@
 #ifndef HW4_VAMPIRE_H
 #define HW4_VAMPIRE_H
-#include "Cards/nonBattleMonsters/Card.h"
+#include "Card.h"
 
 class Vampire : public Card{
 public:

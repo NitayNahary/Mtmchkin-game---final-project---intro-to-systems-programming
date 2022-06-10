@@ -1,9 +1,8 @@
+#ifndef HW4_DRAGON_H
+#define HW4_DRAGON_H
+#include "Card.h"
 
-#ifndef HW4_GOBLIN_H
-#define HW4_GOBLIN_H
-#include "Cards/nonBattleMonsters/Card.h"
-
-class Goblin : public Card{
+class Dragon : public Card{
 public:
     /*
      * Handling the player's applyEncounter with the card:
@@ -23,11 +22,10 @@ private:
     */
     void printInfo(std::ostream& os) const override;
 
-    static const int m_force = 6;
-    static const int m_loot = 2 ;
-    static const int m_damage = 10;
-    const bool m_isDragon = false;
+    static const int m_force = 25;
+    static const int m_loot = 1000 ;
+    static const int m_damage = 1000000;
+    const bool m_isDragon = true;
 };
 
-
-#endif //HW4_GOBLIN_H
+#endif //HW4_DRAGON_H

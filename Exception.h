@@ -58,4 +58,11 @@ class GeneralError : public exception{
     }
 };
 
+// Invalid team players input exception
+class InvalidTeamInput : public exception{
+    std::string what() const override{
+        return "Invalid team players input";
+    }
+};
+
 #endif //HW4_EXCEPTION_H

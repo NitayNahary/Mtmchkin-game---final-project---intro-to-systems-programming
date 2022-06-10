@@ -239,12 +239,12 @@ void getStringInput(string& dest, void invalidError()){
     std::string theInput;
     std::getline(std::cin, theInput);
     while(std::cin.fail()) {
-        invalidError();
         std::cin.clear();
         std::getline(std::cin, theInput);
         if(std::cin.eof()){
             throw EndOfFile();
         }
+        invalidError();
     }
     dest = theInput;
 }
