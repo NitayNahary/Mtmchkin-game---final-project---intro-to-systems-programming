@@ -1,9 +1,9 @@
 
-#ifndef HW4_FAIRY_H
-#define HW4_FAIRY_H
+#ifndef HW4_GOBLIN_H
+#define HW4_GOBLIN_H
 #include "Card.h"
 
-class Fairy : public Card {
+class Goblin : public Card{
 public:
     /*
      * Handling the player's applyEncounter with the card:
@@ -12,24 +12,22 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player &player) override;
+    void applyEncounter(Player& player) override;
 
-
+private:
     /*
      * Prints the card info:
      *
      * @return
      *      void
     */
-
-
-    /*
-     * Here we are explicitly telling the compiler to use the default methods
-    */
-private:
     void printInfo(std::ostream& os) const override;
-    static const int M_EFFECT_VALUE = 10;
-    bool m_isWizard;
+
+    static const int m_force = 6;
+    static const int m_loot = 2 ;
+    static const int m_damage = 10;
+    const bool m_isDragon = false;
 };
 
-#endif //HW4_FAIRY_H
+
+#endif //HW4_GOBLIN_H

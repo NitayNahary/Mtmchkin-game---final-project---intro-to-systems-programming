@@ -26,7 +26,12 @@ static bool isActive(shared_ptr<Player> player){
 Mtmchkin::Mtmchkin(const string& fileName){
     readCards(fileName);
     printStartGameMessage();
-    initPlayers();
+    try {
+        initPlayers();
+    }catch (EndOfFile& eof){
+        std::cout << "Team not full" << std::endl;
+        throw InvalidTeamInput();
+    }
     m_roundsPlayed = 0;
 }
 
@@ -65,12 +70,14 @@ void Mtmchkin::initPlayers(){
         }
         badInputFlag = false;
         string input;
-        getStringInput(input);
+            getStringInput(input);
+//        std::cerr << input << std::endl;
         int spaceIndex = input.find_first_of(' ');
         string name, playerType;
         name = input.substr(0,spaceIndex);
         playerType = input.substr(spaceIndex+1);
         if(playerType.length() == 0 || spaceIndex == string::npos || playerType.find_first_of(' ') != string::npos){
+//            std::cout << playerType << name << std::endl;
             printInvalidInput();
             badInputFlag = true;
         }

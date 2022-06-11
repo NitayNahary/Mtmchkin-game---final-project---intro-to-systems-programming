@@ -5,15 +5,15 @@
 #include <string>
 #include <iostream>
 
-#include "Cards/nonBattleMonsters/Card.h"
-#include "Cards/nonBattleMonsters/Barfight.h"
-#include "Cards/battleMonsters/Dragon.h"
-#include "Cards/nonBattleMonsters/Fairy.h"
-#include "Cards/battleMonsters/Goblin.h"
-#include "Cards/nonBattleMonsters/Merchant.h"
-#include "Cards/battleMonsters/Vampire.h"
-#include "Cards/nonBattleMonsters/Pitfall.h"
-#include "Cards/nonBattleMonsters/Treasure.h"
+#include "Cards/Card.h"
+#include "Cards/Barfight.h"
+#include "Cards/Dragon.h"
+#include "Cards/Fairy.h"
+#include "Cards/Goblin.h"
+#include "Cards/Merchant.h"
+#include "Cards/Vampire.h"
+#include "Cards/Pitfall.h"
+#include "Cards/Treasure.h"
 
 #include "Players/Player.h"
 #include "Players/Fighter.h"

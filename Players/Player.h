@@ -30,20 +30,24 @@ public:
     virtual ~Player() = default;
 
 //--------------------------------------------------FUNCTIONS---------------------------------------------------------//
-
+    //operator << prints the players details in this format:
+    //<name> <level> <Force> <Hp> <Coins> <Class>
     friend std::ostream& operator<<(std::ostream& os,const Player& player);
 
-    //get the name of the player
+    //@returns player class
+    virtual std::string getClass() const = 0;
+
+    //@returns player name
     std::string getName();
 
-    //get the amount of coins the player have
+    //@returns player coins
     int getCoins();
-
-    //increment player level by 1
-    void levelUp();
 
     //@returns player level
     int getLevel() const;
+
+    //increment player level by 1
+    void levelUp();
 
     //increments player force by @param strUp
     void buff(const int strUp);
@@ -73,12 +77,13 @@ public:
     //         players attack strength - calculated as level+force
     virtual int getAttackStrength() const;
 
-    //decrease 1 from the player force
+    //decrease player force by 1
     void weaken();
 
+    //increase player force by 1
     void strengthen();
 
-    virtual std::string getClass() const = 0;
+
 
 
 //----------------------------PLAYER STATS---------------------------------

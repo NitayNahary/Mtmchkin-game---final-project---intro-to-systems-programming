@@ -1,9 +1,9 @@
 
-#ifndef HW4_BARFIGHT_H
-#define HW4_BARFIGHT_H
+#ifndef HW4_TREASURE_H
+#define HW4_TREASURE_H
 #include "Card.h"
 
-class Barfight : public Card{
+class Treasure : public Card {
 public:
     /*
      * Handling the player's applyEncounter with the card:
@@ -14,22 +14,17 @@ public:
     */
     void applyEncounter(Player &player) override;
 
-
+private:
     /*
      * Prints the card info:
      *
      * @return
      *      void
     */
-
-
-    /*
-     * Here we are explicitly telling the compiler to use the default methods
-    */
-private:
     void printInfo(std::ostream& os) const override;
+
     static const int M_EFFECT_VALUE = 10;
-    bool m_isFighter;
 };
 
-#endif //HW4_BARFIGHT_H
+
+#endif //HW4_TREASURE_H

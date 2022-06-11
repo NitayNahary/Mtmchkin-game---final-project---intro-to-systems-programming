@@ -18,6 +18,7 @@ Player::Player(const std::string name) :  m_level(STARTING_LEVEL), m_force(DEFAU
     }else
         throw InvalidName(); //add trhow
 }
+//--------------------------------------------------------------------------------------------------------------------//
 
 std::ostream& operator<<(std::ostream& os,const Player& player){
     std::string job = player.getClass();
