@@ -21,7 +21,7 @@
 #include "Players/Rogue.h"
 
 #include "Queue.h"
-#include "utilities.h"
+#include "../utilities.h"
 #include <memory>
 
 #define NOT_FOUND -1

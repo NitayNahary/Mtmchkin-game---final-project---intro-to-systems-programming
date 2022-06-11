@@ -5,6 +5,8 @@
 
 class Pitfall : public Card{
 public:
+
+    Pitfall();
     /*
      * Handling the player's applyEncounter with the card:
      *

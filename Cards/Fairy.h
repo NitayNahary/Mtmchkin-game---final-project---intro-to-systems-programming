@@ -5,6 +5,7 @@
 
 class Fairy : public Card {
 public:
+    Fairy();
     /*
      * Handling the player's applyEncounter with the card:
      *

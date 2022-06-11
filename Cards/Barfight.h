@@ -5,6 +5,7 @@
 
 class Barfight : public Card{
 public:
+    Barfight();
     /*
      * Handling the player's applyEncounter with the card:
      *

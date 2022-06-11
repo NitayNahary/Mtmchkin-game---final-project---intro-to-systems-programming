@@ -2,7 +2,7 @@
 // Created by itke on 4/20/2022.
 //
 #include <map>
-#include "utilities.h"
+#include "../utilities.h"
 using std::cout;
 using std::string;
 using std::ostream;
@@ -252,7 +252,7 @@ bool isValidName(const std::string& name){
     if(name.size() > MAX_NAME_LEGTH){
         return false;
     }
-    for(int i=0; i < name.size(); i++){
+    for(string::size_type i=0; i < name.size(); i++){
         if(name[i] < 'A' || (name[i] > 'Z' && name[i] <'a') || name[i] > 'z'){
             return false;
         }

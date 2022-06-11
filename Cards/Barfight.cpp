@@ -1,6 +1,8 @@
 
 #include "Barfight.h"
 
+Barfight::Barfight() : m_isFighter(false){}
+
 void Barfight::applyEncounter(Player &player){
     m_isFighter = player.getClass() == "Fighter";
     if(!m_isFighter) {

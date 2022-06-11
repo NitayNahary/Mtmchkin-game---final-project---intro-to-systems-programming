@@ -1,6 +1,8 @@
 
 #include "Fairy.h"
 
+Fairy::Fairy() : m_isWizard(false){}
+
 void Fairy::applyEncounter(Player &player){
     m_isWizard = player.getClass() == "Wizard";
     if(m_isWizard){

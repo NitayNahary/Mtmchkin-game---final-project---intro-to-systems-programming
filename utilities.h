@@ -7,7 +7,7 @@
 #include <sstream>
 #include <functional>
 
-#include "Exception.h"
+#include "../Exception.h"
 
 #define BUFFER_SIZE 256
 #include "Players/Player.h"
@@ -265,7 +265,7 @@ void printEnterTeamSizeMessage();
 
 /* ---------------------------------------------------------------------------------------------- */
 
-void getIntInputNumber(int& dest, int startOfRange = -INT_MAX, int endOfRange = INT_MAX , void invalidError() = printInvalidInput);
+void getIntInputNumber(int& dest, int startOfRange = -0x7fffffff, int endOfRange = 0x7fffffff , void invalidError() = printInvalidInput);
 
 void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
 

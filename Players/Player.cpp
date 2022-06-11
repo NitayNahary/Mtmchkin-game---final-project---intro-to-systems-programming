@@ -1,10 +1,7 @@
 #include "Player.h"
-#include "utilities.h"
-#include "Exception.h"
+#include "../utilities.h"
+#include "../Exception.h"
 
-static bool isNotNegative(const int value){
-    return (value>=0);
-}
 
 static int zeroNegativeNumbers(const int value){
     return (value > 0 ? value : 0);
