@@ -92,7 +92,7 @@ private:
      * loss if player hp hit 0
      * midgame otherwise
      */
-    void updatePlayerStatus(std::shared_ptr<Player> player);
+    void updatePlayerStatus(const std::shared_ptr<Player>& player);
 };
 
 
