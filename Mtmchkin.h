@@ -21,7 +21,6 @@
 #include "Players/Rogue.h"
 
 #include "Queue.h"
-#include "SmartPtr.h"
 #include "utilities.h"
 #include <memory>
 
