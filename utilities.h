@@ -7,7 +7,7 @@
 #include <sstream>
 #include <functional>
 
-#include "../Exception.h"
+#include "Exception.h"
 
 #define BUFFER_SIZE 256
 #include "Players/Player.h"

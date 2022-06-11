@@ -2,7 +2,7 @@
 // Created by itke on 4/20/2022.
 //
 #include <map>
-#include "../utilities.h"
+#include "utilities.h"
 using std::cout;
 using std::string;
 using std::ostream;

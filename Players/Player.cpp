@@ -8,12 +8,12 @@ static int zeroNegativeNumbers(const int value){
 }
 
 Player::Player(const std::string name) :  m_level(STARTING_LEVEL), m_force(DEFAULT_FORCE),
-                                    m_maxHP(DEFAULT_MAXHP), m_HP(DEFAULT_MAXHP), m_coins(STARTING_COINS)
+                                    m_HP(DEFAULT_MAXHP), m_maxHP(DEFAULT_MAXHP), m_coins(STARTING_COINS)
 {
     if(isValidName(name)){
         m_name = name;
     }else
-        throw InvalidName(); //add trhow
+        throw InvalidName();
 }
 //--------------------------------------------------------------------------------------------------------------------//
 
