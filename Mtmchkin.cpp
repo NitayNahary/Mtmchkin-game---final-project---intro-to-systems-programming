@@ -114,7 +114,7 @@ int Mtmchkin::buildMyPlayer(const string& playerType , const string& name){
                             return NOT_FOUND;
         }
     }catch(std::out_of_range& a){
-        Wizard p(name); //dummy player for name check
+        Wizard nameCheck(name); //dummy player for name check
         return NOT_FOUND;
     }
     return FOUND;
@@ -157,7 +157,7 @@ int Mtmchkin::buildMyCard(const string& cardTypeIndex){
     return FOUND;
 }
 
-void Mtmchkin::updatePlayerStatus(shared_ptr<Player> player){
+void Mtmchkin::updatePlayerStatus(const shared_ptr<Player>& player){
     if(player->isKnockedOut()){
         m_deadPlayers.push(player);
     }else if(player->getLevel() == WIN_CONDITION){
