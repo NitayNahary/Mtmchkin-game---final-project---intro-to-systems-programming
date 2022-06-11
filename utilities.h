@@ -6,12 +6,13 @@
 #include <cstring>
 #include <sstream>
 #include <functional>
+#include <limits.h>
 
 #include "Exception.h"
 
 #define BUFFER_SIZE 256
 #include "Players/Player.h"
-#define MAX_NAME_LEGTH 15
+#define MAX_NAME_LENGTH 15
 
 /* ---------------------------------------------------------------------------------------------- */
 
@@ -265,7 +266,7 @@ void printEnterTeamSizeMessage();
 
 /* ---------------------------------------------------------------------------------------------- */
 
-void getIntInputNumber(int& dest, int startOfRange = -0x7fffffff, int endOfRange = 0x7fffffff , void invalidError() = printInvalidInput);
+void getIntInputNumber(int& dest, int startOfRange = -INT_MAX, int endOfRange = INT_MAX , void invalidError() = printInvalidInput);
 
 void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
 

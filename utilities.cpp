@@ -249,7 +249,7 @@ void getStringInput(string& dest, void invalidError()){
     dest = theInput;
 }
 bool isValidName(const std::string& name){
-    if(name.size() > MAX_NAME_LEGTH){
+    if(name.size() > MAX_NAME_LENGTH){
         return false;
     }
     for(string::size_type i=0; i < name.size(); i++){

@@ -1,6 +1,8 @@
 
 #include "Merchant.h"
 
+Merchant::Merchant() : m_buy(-1){}
+
 void Merchant::applyEncounter(Player &player) {
     m_buyerName = player.getName();
     printMerchantInitialMessageForInteractiveEncounter(std::cout, m_buyerName, player.getCoins());

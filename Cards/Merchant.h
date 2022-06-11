@@ -6,6 +6,7 @@
 #define SELL_END_INPUT_RANGE 2
 class Merchant : public Card {
 public:
+    Merchant();
     /*
      * Handling the player's applyEncounter with the card:
      *
