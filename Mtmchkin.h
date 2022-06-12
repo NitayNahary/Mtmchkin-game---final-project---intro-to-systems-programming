@@ -24,15 +24,17 @@
 #include "utilities.h"
 #include <memory>
 
-#define NOT_FOUND -1
-#define FOUND 1
+#define VALID_INPUT 1
+#define INVALID_CLASS -2
+#define INVALID_NAME -1
+#define INVALID_CARD -1
 #define MIN_DECK_SIZE 5
 #define MIN_PLAYERS 2
 #define MAX_PLAYERS 6
 
 
-enum class CardTypes{Barfight , Dragon , Fairy , Goblin , Merchant , Treasure , Pitfall , Vampire};
-enum class PlayerClass{Rogue , Wizard , Fighter};
+enum class CardTypes{notCard,Barfight , Dragon , Fairy , Goblin , Merchant , Treasure , Pitfall , Vampire};
+enum class PlayerClass{notClass,Rogue , Wizard , Fighter};
 
 static const int WIN_CONDITION = 10;
 
