@@ -3,7 +3,7 @@
 
 #include <string>
 #include <iostream>
-#include "../utilities.h"
+#include "../MyUtilities.h"
 #include "../Players/Player.h"
 class Card {
     /*

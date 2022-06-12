@@ -4,7 +4,7 @@
 #include <string>
 
 // The base class for exceptions
-static const char* DECK_NOT_FOUND ="";
+//static const char* DECK_NOT_FOUND ="";
 class exception {
 public:
     virtual ~exception() = default;
@@ -25,7 +25,7 @@ class DeckFileFormatError : public exception {
 public:
     DeckFileFormatError(int lineNumber) : m_lineNumber(lineNumber){}
     const char* what() const override{
-        const std::string result = std::string("Deck File Error: File format error in line ") + std::to_string(m_lineNumber);
+        std::string result = "Deck File Error: File format error in line " + std::to_string(m_lineNumber);
         return result.c_str();
     }
 };

@@ -1,26 +1,22 @@
 
-#ifndef CPP_SHIT_UTIL_H
-#define CPP_SHIT_UTIL_H
+#ifndef CPP_UTIL_H
+#define CPP_UTIL_H
 
 #include <iostream>
 #include <cstring>
 #include <sstream>
 #include <functional>
-#include <limits.h>
 
 #include "Exception.h"
-
-#define BUFFER_SIZE 256
 #include "Players/Player.h"
-#define MAX_NAME_LENGTH 15
+
 
 /* ---------------------------------------------------------------------------------------------- */
-
 // ----------------       Print functions for Player class          -----------------------
 
 /*
  * Prints the details of the player:
- * Tip : Needed for the leaderBoard method (adjusted to print after the ranking section).
+ * Tip : Needed for the leaderBoard method (adjusted to print after the ranking section). 
  * @param os - The ostream.
  * @param name - The name of the player.
  * @param job - The job class of the player.
@@ -31,12 +27,10 @@
  * @return
  *      void
  */
-void printPlayerDetails(std::ostream &os, std::string name,  std::string job, int level, int force, int HP, int coins);
-
+void printPlayerDetails(std::ostream &os, const std::string &name, const std::string &job, int level, int force, int HP, int coins);
 
 /* ---------------------------------------------------------------------------------------------- */
-
-// ----------------------------        Print functions for Fairy class         --------------------------
+// ----------------------------        Print functions for Card class         --------------------------
 
 /*
  * Prints the details of a general card:
@@ -46,7 +40,7 @@ void printPlayerDetails(std::ostream &os, std::string name,  std::string job, in
  *      void
  */
 
-void printCardDetails( std::ostream &os,  std::string name);
+void printCardDetails(std::ostream &os, const std::string &name);
 
 /*
  * Prints the final line that seperates messages:
@@ -54,28 +48,26 @@ void printCardDetails( std::ostream &os,  std::string name);
  * @return
  *      void
  */
-//void printEndOfCardDetails(ostream &os);
+void printEndOfCardDetails(std::ostream &os);
 /*
  * Prints the details of a merchant card:
-
+ 
  * @param os - The ostream.
  * @param playerName - The name of the player who encountered the merchant.
  * @param coins - The player's amount of coins.
  * @return
  *      void
  */
-void printMerchantInitialMessageForInteractiveEncounter(std::ostream &os, std::string playerName, int coins);
-
+void printMerchantInitialMessageForInteractiveEncounter(std::ostream &os, const std::string &playerName, int coins);
 
 /*
  * Prints a message informing the player that he has an insufficient coins for this purchase.
-
+ 
  * @param os - The ostream.
  * @return
  *      void
  */
 void printMerchantInsufficientCoins(std::ostream &os);
-
 
 /*
  * Prints the details of a monster card:
@@ -88,10 +80,9 @@ void printMerchantInsufficientCoins(std::ostream &os);
  */
 void printMonsterDetails(std::ostream &os, int force, int damage, int coins, bool isDragon = false);
 
-
 /*
  * Prints outcome summary of encountering the BarFight card:
-
+ 
  * @param isFighter - Indicates weither the player who encountered this card is a Fighter or not.
  * @return
  *      void
@@ -101,7 +92,7 @@ void printBarfightMessage(bool isFighter);
 
 /*
  * Prints outcome summary of encountering the Fairy card:
-
+ 
  * @param isWizard - Indicates weither the player who encountered this card is a Wizard or not.
  * @return
  *      void
@@ -111,7 +102,7 @@ void printFairyMessage(bool isWizard);
 
 /*
  * Prints outcome summary of encountering the PitFall card:
-
+ 
  * @param isRogue - Indicates weither the player who encountered this card is a Rogue or not.
  * @return
  *      void
@@ -121,17 +112,16 @@ void printPitfallMessage(bool isRogue);
 
 /*
  * Prints outcome summary of encountering the Treasure card:
-
+ 
  * @return
  *      void
  *
  */
 void printTreasureMessage();
 
-
 /*
  * Prints outcome summary of encountering the Merchant card:
-
+ 
  * @param os - The ostream.
  * @param playerName - The name of the player who encountered the merchant.
  * @param type - The type of purchase the player has made (1 for potion / 2 for boost).
@@ -141,15 +131,14 @@ void printTreasureMessage();
  *      void
  *
  */
-void printMerchantSummary(std::ostream &os, std::string playerName, int type, int cost);
+void printMerchantSummary(std::ostream &os, const std::string &playerName, int type, int cost);
 
 /* ---------------------------------------------------------------------------------------------- */
-
 // ----------------       Print functions for Mtmchkin class          -----------------------
 
 /*
  * Prints info indicating the start of the game:
-
+ 
  * @return
  *      void
  */
@@ -191,7 +180,7 @@ void printInvalidInput();
  *      void
  */
 
-void printTurnStartMessage(std::string name);
+void printTurnStartMessage(const std::string &name);
 
 
 /* Prints info at the start of a round (used at the start of each round):
@@ -208,7 +197,7 @@ void printRoundStartMessage(int roundCount);
  * @return
  *      void
  */
-void printWinBattle(std::string playerName, std::string monsterName);
+void printWinBattle(const std::string &playerName, const std::string &monsterName);
 
 /*
  * Prints info in case a player lost in an encounter (Battle card):
@@ -218,8 +207,7 @@ void printWinBattle(std::string playerName, std::string monsterName);
  * @return
  *      void
  */
-void printLossBattle(std::string playerName, std::string monsterName);
-
+void printLossBattle(const std::string &playerName, const std::string &monsterName);
 
 /*
  * Prints a message indicating the start of the LeaderBoard Ranking:
@@ -230,18 +218,18 @@ void printLeaderBoardStartMessage();
 
 /*
  * Prints the ranking of a player in the leaderboard:
-
+ 
  * @param ranking - The player's ranking in the leaderBoard.
  * @param player - The player whose ranked in that place to print his info in the leaderboard.
  * @param status - The player's status in the game at this stage (Won/Ongoing/KO).
  * @return
  *      void
  */
-void printPlayerLeaderBoard(int ranking, Player& player);
+void printPlayerLeaderBoard(int ranking, const Player &player);
 
 /*
  * Prints info indicating the end of the game:
-
+ 
  * @return
  *      void
  */
@@ -250,7 +238,7 @@ void printGameEndMessage();
 
 /*
  * Prints a message indicating that the user has entered an invalid team size:
-
+ 
  * @return
  *      void
  */
@@ -258,7 +246,7 @@ void printInvalidTeamSize();
 
 /*
  * Prints a message asking the user to enter a team size:
-
+ 
  * @return
  *      void
  */
@@ -266,10 +254,6 @@ void printEnterTeamSizeMessage();
 
 /* ---------------------------------------------------------------------------------------------- */
 
-void getIntInputNumber(int& dest, int startOfRange = -INT_MAX, int endOfRange = INT_MAX , void invalidError() = printInvalidInput);
 
-void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
 
-bool isValidName(const std::string& name);
-
-#endif //CPP_SHIT_UTIL_H
+#endif //CPP_UTIL_H

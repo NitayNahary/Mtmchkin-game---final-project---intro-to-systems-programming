@@ -301,7 +301,7 @@ bool badFormatTest()
     }
     catch(const DeckFileFormatError& e){
         std::cerr << e.what() <<std::endl;
-        if(e.what()=="Deck File Error: File format error in line 2") {
+        if(strcmp(e.what(),"Deck File Error: File format error in line 2") == 0) {
             flag=true;
         }
     }
@@ -319,7 +319,7 @@ bool badFormatStartTest()
         Mtmchkin("inputs/badFormat_test_start_of_file.txt");
     }
     catch(const DeckFileFormatError& e){
-        if(e.what()=="Deck File Error: File format error in line 1")
+        if(strcmp(e.what(),"Deck File Error: File format error in line 1")==0)
         {
             flag = true;
         }

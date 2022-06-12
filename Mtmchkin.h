@@ -21,7 +21,7 @@
 #include "Players/Rogue.h"
 
 #include "Queue.h"
-#include "utilities.h"
+#include "MyUtilities.h"
 #include <memory>
 
 #define VALID_INPUT 1

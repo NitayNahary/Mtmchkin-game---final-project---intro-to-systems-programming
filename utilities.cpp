@@ -1,20 +1,18 @@
 //
 // Created by itke on 4/20/2022.
 //
-#include <map>
+
 #include "utilities.h"
+
 using std::cout;
 using std::string;
 using std::ostream;
 using std::endl;
 
-
-
 /* ---------------------------------------------------------------------------------------------- */
-
 // ----------------       Print functions for Player class          -----------------------
 
-void printPlayerDetails(ostream &os, string name, string job, int level, int force, int HP, int coins)
+void printPlayerDetails(ostream &os, const string &name, const string &job, int level, int force, int HP, int coins)
 {
     const int nameDistance = 16;
     const int distance = 6;
@@ -41,14 +39,12 @@ void printPlayerDetails(ostream &os, string name, string job, int level, int for
     os << job << "  ";
 }
 
-
 /* ---------------------------------------------------------------------------------------------- */
+// ----------------------------        Print functions for Card class         --------------------------
 
-// ----------------------------        Print functions for Fairy class         --------------------------
-
-void printCardDetails(ostream &os, string name)
+void printCardDetails(ostream &os, const string &name)
 {
-    os << "Fairy Details:" << endl;
+    os << "Card Details:" << endl;
     os << "Name: " << name << endl;
 }
 
@@ -57,7 +53,7 @@ void printEndOfCardDetails(ostream &os)
     os << "-------------------------------" << std::endl;
 }
 
-void printMerchantInitialMessageForInteractiveEncounter(ostream &os, string playerName, int coins)
+void printMerchantInitialMessageForInteractiveEncounter(ostream &os, const string &playerName, int coins)
 {
     os << "You've ran into a Merchant!" << endl;
     os << "Browse his wares:"<< endl;
@@ -102,7 +98,6 @@ void printFairyMessage(bool isWizard)
     }
 }
 
-
 void printPitfallMessage(bool isRogue)
 {
     if(isRogue){
@@ -118,11 +113,11 @@ void printTreasureMessage()
     cout << "You've stumbled into a pile of coins! you've gained 10 gold." << endl;
 }
 
-void printMerchantSummary(ostream &os, string playerName, int type, int cost)
+void printMerchantSummary(ostream &os, const string &playerName, int type, int cost)
 {
     os << playerName << " has paid " << cost << " coins ";
     if(type != 0){
-        os << "for ";
+        os << "for ";;
     }
 
     if(type == 1){
@@ -135,7 +130,6 @@ void printMerchantSummary(ostream &os, string playerName, int type, int cost)
 }
 
 /* ---------------------------------------------------------------------------------------------- */
-
 // Prints for Game
 
 void printInsertPlayerMessage()
@@ -173,8 +167,7 @@ void printEnterTeamSizeMessage()
     cout << "Please enter team size: (2-6)" << endl;
 }
 
-
-void printTurnStartMessage(string name)
+void printTurnStartMessage(const string &name)
 {
     cout << "Start of " << name << "'s turn: " << endl;
 }
@@ -185,16 +178,15 @@ void printRoundStartMessage(int roundCount)
     cout << "Start of round " << roundCount << ":" << endl << endl;
 }
 
-void printWinBattle(string playerName, string monsterName)
+void printWinBattle(const string &playerName, const string &monsterName)
 {
     cout << "Player " << playerName << " has defeated " << monsterName << " and rose 1 Level!" << endl;
 }
 
-void printLossBattle(string playerName, string monsterName)
+void printLossBattle(const string &playerName, const string &monsterName)
 {
     cout << "Player " << playerName << " has been defeated by a " << monsterName << "." << endl;
 }
-
 
 void printLeaderBoardStartMessage()
 {
@@ -202,7 +194,7 @@ void printLeaderBoardStartMessage()
     cout << "Ranking    Player Name     Level     Force HP    Coins Job" << endl;
 }
 
-void printPlayerLeaderBoard(int ranking, Player& player)
+void printPlayerLeaderBoard(int ranking, const Player& player)
 {
     cout << ranking << "          " << player << endl;
 }
@@ -210,52 +202,4 @@ void printPlayerLeaderBoard(int ranking, Player& player)
 void printGameEndMessage()
 {
     cout << "The Game has ended!!!" << endl;
-}
-void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalidError()){
-    std::string theInput;
-    int inputAsInt;
-    do {
-        std::getline(std::cin, theInput);
-
-        while (std::cin.fail() || std::cin.eof() || theInput.find_first_not_of("0123456789") != std::string::npos) {
-            if(std::cin.eof()){
-                throw EndOfFile();
-            }
-            invalidError();
-
-            if (theInput.find_first_not_of("0123456789") == std::string::npos) {
-                std::cin.clear();
-                std::cin.ignore(256, '\n');
-            }
-
-            std::getline(std::cin, theInput);
-        }
-        std::string::size_type st;
-        inputAsInt = std::stoi(theInput, &st);
-    } while (inputAsInt < startOfRange || inputAsInt > endOfRange);
-    dest = inputAsInt;
-}
-void getStringInput(string& dest, void invalidError()){
-    std::string theInput;
-    std::getline(std::cin, theInput);
-    while(std::cin.fail()) {
-        std::cin.clear();
-        std::getline(std::cin, theInput);
-        if(std::cin.eof()){
-            throw EndOfFile();
-        }
-        invalidError();
-    }
-    dest = theInput;
-}
-bool isValidName(const std::string& name){
-    if(name.size() > MAX_NAME_LENGTH){
-        return false;
-    }
-    for(string::size_type i=0; i < name.size(); i++){
-        if(name[i] < 'A' || (name[i] > 'Z' && name[i] <'a') || name[i] > 'z'){
-            return false;
-        }
-    }
-    return true;
 }
