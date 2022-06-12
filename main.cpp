@@ -300,6 +300,7 @@ bool badFormatTest()
         Mtmchkin("inputs/badFormat_test.txt");
     }
     catch(const DeckFileFormatError& e){
+        std::cerr << e.what() <<std::endl;
         if(e.what()=="Deck File Error: File format error in line 2") {
             flag=true;
         }

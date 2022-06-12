@@ -47,6 +47,7 @@ void Mtmchkin::readCards(const string& fileName){
             buffer[lastChar] = '\0';
         }
         if(buildMyCard(buffer) == NOT_FOUND){
+            fclose(source);
             throw DeckFileFormatError(line);
         }
         for(int i =0; i < BUFFER_SIZE; i++){
@@ -54,6 +55,7 @@ void Mtmchkin::readCards(const string& fileName){
         }
     }
     if(m_deck.size() < MIN_DECK_SIZE){
+        fclose(source);
         throw DeckFileInvalidSize();
     }
     fclose(source);

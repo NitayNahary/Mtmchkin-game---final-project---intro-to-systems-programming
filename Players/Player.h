@@ -8,7 +8,7 @@ public:
     static const int DEFAULT_MAXHP = 100; //HP set to MaxHP in start of game
     static const int STARTING_LEVEL = 1;
     static const int STARTING_COINS = 10;
-    const int WIN_LEVEL = 10;
+    static const int WIN_LEVEL = 10;
 
 
 //---------------------------INITIATOR & DESTRUCTOR----------------------------
@@ -22,7 +22,7 @@ public:
                      @return
                             An instance of Player
 */
-    explicit Player(const std::string name);
+    Player(const std::string name);
 
 //  Copy-Assigment C'tor, Copy C'tor, D'tor - defaulted as string already handles memory, copy and copy-assignment.
     Player& operator=(const Player& src) = default;
