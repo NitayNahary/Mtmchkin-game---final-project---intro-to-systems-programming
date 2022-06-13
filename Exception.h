@@ -2,6 +2,8 @@
 #ifndef HW4_EXCEPTION_H
 #define HW4_EXCEPTION_H
 #include <string>
+#include <iostream>
+#include <cstring>
 
 // The base class for exceptions
 //static const char* DECK_NOT_FOUND ="";
@@ -21,12 +23,19 @@ class DeckFileNotFound : public exception {
 // Format error in deck file exception
 // Returns the line number
 class DeckFileFormatError : public exception {
+    static const int BUFFER_SIZE = 64;
     int m_lineNumber;
+    char m_result[BUFFER_SIZE];
 public:
-    DeckFileFormatError(int lineNumber) : m_lineNumber(lineNumber){}
+    DeckFileFormatError(int lineNumber) : m_lineNumber(lineNumber), m_result(){
+        for(int i = 0; i<BUFFER_SIZE; i++){
+            m_result[i] = '\0';
+        }
+        strcat(m_result,"Deck File Error: File format error in line ");
+        sprintf(m_result + strlen(m_result), "%d", m_lineNumber);
+    }
     const char* what() const override{
-        std::string result = "Deck File Error: File format error in line " + std::to_string(m_lineNumber);
-        return result.c_str();
+        return m_result;
     }
 };
 

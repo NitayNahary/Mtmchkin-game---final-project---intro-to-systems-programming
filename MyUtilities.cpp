@@ -15,11 +15,8 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
                 throw EndOfFile();
             }
             invalidError();
-
-            if (input.find_first_not_of("0123456789") == std::string::npos) {
-                std::cin.clear();
-                std::cin.ignore(FAIL_BUFFER, '\n');
-            }
+            std::cin.clear();
+            std::cin.ignore(FAIL_BUFFER, '\n');
             std::getline(std::cin, input);
         }
         std::string::size_type st;
