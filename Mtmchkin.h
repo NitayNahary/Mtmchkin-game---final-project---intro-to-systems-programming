@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-
+#include <queue>
 #include "Cards/Card.h"
 #include "Cards/Barfight.h"
 #include "Cards/Dragon.h"

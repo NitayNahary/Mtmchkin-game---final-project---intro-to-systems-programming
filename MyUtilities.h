@@ -3,7 +3,7 @@
 #define MY_UTIL_H
 
 
-#include <limits>
+#include <limits.h>
 #include "utilities.h"
 #include "Exception.h"
 
