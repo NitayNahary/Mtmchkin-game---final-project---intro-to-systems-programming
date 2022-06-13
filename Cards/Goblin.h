@@ -21,7 +21,7 @@ private:
      * @return
      *      void
     */
-    void printInfo(std::ostream& os) const override;
+    void printInfo() const override;
 
     static const int m_force = 6;
     static const int m_loot = 2 ;

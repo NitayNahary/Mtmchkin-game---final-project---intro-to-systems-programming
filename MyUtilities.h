@@ -3,9 +3,8 @@
 #define MY_UTIL_H
 
 
-#include <limits.h>
+#include <limits>
 #include "utilities.h"
-
 #include "Exception.h"
 
 #define BUFFER_SIZE 256

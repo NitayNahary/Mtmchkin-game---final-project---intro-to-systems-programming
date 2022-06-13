@@ -8,9 +8,9 @@ void Pitfall::applyEncounter(Player &player){
     m_isRogue = player.getClass() == "Rogue";
     if(!m_isRogue)
         player.damage(M_EFFECT_VALUE);
-    printInfo(std::cout);
+    printInfo();
 }
 
-void Pitfall::printInfo(std::ostream& os) const {
+void Pitfall::printInfo() const {
     printPitfallMessage(m_isRogue);
 }

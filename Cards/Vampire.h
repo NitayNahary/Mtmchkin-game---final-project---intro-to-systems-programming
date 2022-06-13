@@ -20,7 +20,7 @@ private:
      * @return
      *      void
     */
-    void printInfo(std::ostream& os) const override;
+    void printInfo() const override;
 
     static const int m_force = 10;
     static const int m_loot = 2 ;

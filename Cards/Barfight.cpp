@@ -8,9 +8,9 @@ void Barfight::applyEncounter(Player &player){
     if(!m_isFighter) {
         player.damage(M_EFFECT_VALUE);
     }
-    printInfo(std::cout);
+    printInfo();
 }
 
-void Barfight::printInfo(std::ostream& os) const {
+void Barfight::printInfo() const {
     printBarfightMessage(m_isFighter);
 }

@@ -22,7 +22,7 @@ private:
      * @return
      *      void
     */
-    void printInfo(std::ostream& os) const override;
+    void printInfo() const override;
 
     static const int M_EFFECT_VALUE = 10;
     bool m_isWizard;

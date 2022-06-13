@@ -36,25 +36,17 @@ Mtmchkin::Mtmchkin(const string& fileName){
 }
 
 void Mtmchkin::readCards(const string& fileName){
-    FILE* source = fopen(fileName.c_str(), "r");
-    if(source == nullptr){
+    std::fstream source(fileName);
+    if(source.fail() || !source){
         throw DeckFileNotFound();
     }
-    char buffer[BUFFER_SIZE] = {'\0'};
-    for(int line = 1; fgets(buffer,BUFFER_SIZE,source) != nullptr; line++){
-        int lastChar = strlen(buffer)-1;
-        if(lastChar >=0 && buffer[lastChar] == '\n'){
-            buffer[lastChar] = '\0';
-        }
-        if(buildMyCard(buffer) == INVALID_CARD){
-            fclose(source);
+    string lineText;
+    for(int line = 1; !source.eof(); line++){
+        std::getline(source , lineText);
+        if(buildMyCard(lineText) == INVALID_CARD && !source.eof()){
             throw DeckFileFormatError(line);
         }
-        for(int i =0; i < BUFFER_SIZE; i++){
-            buffer[i] = '\0';
-        }
     }
-    fclose(source);
     if(m_deck.size() < MIN_DECK_SIZE){
         throw DeckFileInvalidSize();
     }
@@ -66,36 +58,26 @@ void Mtmchkin::initPlayers(){
     getIntInputNumber(numberOfPlayers, MIN_PLAYERS, MAX_PLAYERS, printInvalidTeamSize);
 
     bool badInputFlag = false;
-    for(int i = 0; i < numberOfPlayers; i++){
+    for(int i = 0; i < numberOfPlayers; badInputFlag ? i : i++){
         if(!badInputFlag) { //checking if last round had a bad input
             printInsertPlayerMessage();
         }
         badInputFlag = true;
-        string input;
-        getStringInput(input);
 
+        string input, name, playerType;
+        getStringInput(input);
         string::size_type spaceIndex = input.find_first_of(' ');
-        string name, playerType;
         name = input.substr(0,spaceIndex);
         playerType = input.substr(spaceIndex+1);
-
-        if(spaceIndex == string::npos || playerType.find_first_of(' ') != string::npos){
-            printInvalidInput();
-        }
-        else{
-            switch(buildMyPlayer(playerType, name)){
-                case INVALID_NAME:
-                    printInvalidName();
-                    break;
-                case INVALID_CLASS:
-                    printInvalidClass();
-                    break;
-                default:
-                    badInputFlag = false;
-            }
-        }
-        if(badInputFlag){
-            i--;
+        switch(buildMyPlayer(playerType, name)){
+            case INVALID_NAME:
+                printInvalidName();
+                break;
+            case INVALID_CLASS:
+                printInvalidClass();
+                break;
+            default:
+                badInputFlag = false;
         }
     }
 }
@@ -167,7 +149,7 @@ void Mtmchkin::updatePlayerStatus(const shared_ptr<Player>& player){
 void Mtmchkin::playRound(){
     printRoundStartMessage(++m_roundsPlayed);
     for(shared_ptr<Player> player : m_activePlayers){
-        printTurnStartMessage(player->getName());
+        printTurnStartMessage(player->name());
         shared_ptr<Card> playingCard = m_deck.front();
         playingCard->applyEncounter(*player);
         updatePlayerStatus(player);

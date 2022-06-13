@@ -23,7 +23,7 @@ private:
      * @return
      *      void
     */
-    void printInfo(std::ostream& os) const override;
+    void printInfo() const override;
 
     static const int M_ITEM_VALUE = 1;
     static const int M_HP_COST = 5;

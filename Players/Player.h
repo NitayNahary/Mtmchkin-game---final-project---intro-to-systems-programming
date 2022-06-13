@@ -2,6 +2,8 @@
 #define HW4_PLAYER_H
 
 #include <string>
+#include "../Exception.h"
+
 class Player{
 public:
     static const int DEFAULT_FORCE = 5;
@@ -38,10 +40,10 @@ public:
     virtual std::string getClass() const = 0;
 
     //@returns player name
-    std::string getName();
+    std::string name();
 
     //@returns player coins
-    int getCoins();
+    int purse();
 
     //@returns player level
     int getLevel() const;

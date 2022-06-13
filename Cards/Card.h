@@ -12,7 +12,7 @@ class Card {
      * @return
      *      void
     */
-    virtual void printInfo(std::ostream& os) const = 0;
+    virtual void printInfo() const = 0;
 public:
     /* Virtual function
      * Handling the player's applyEncounter with the card:

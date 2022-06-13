@@ -4,8 +4,8 @@
 Merchant::Merchant() : m_buy(-1){}
 
 void Merchant::applyEncounter(Player &player) {
-    m_buyerName = player.getName();
-    printMerchantInitialMessageForInteractiveEncounter(std::cout, m_buyerName, player.getCoins());
+    m_buyerName = player.name();
+    printMerchantInitialMessageForInteractiveEncounter(std::cout, m_buyerName, player.purse());
     getIntInputNumber(m_buy, SELL_START_INPUT_RANGE, SELL_END_INPUT_RANGE);
 
     bool hadMoney = false;
@@ -27,24 +27,23 @@ void Merchant::applyEncounter(Player &player) {
             break;
         default:
             throw GeneralError(); // general error unknown
-            ;
     }
     if(!hadMoney) {
         printMerchantInsufficientCoins(std::cout);
     }
-    printInfo(std::cout);
+    printInfo();
 }
 
-void Merchant::printInfo(std::ostream& os) const {
+void Merchant::printInfo() const {
     switch(m_buy){
         case M_BUY_FORCE:
-            printMerchantSummary(os, m_buyerName, m_buy, M_FORCE_COST);
+            printMerchantSummary(std::cout, m_buyerName, m_buy, M_FORCE_COST);
             break;
         case M_BUY_HP:
-            printMerchantSummary(os, m_buyerName, m_buy, M_HP_COST);
+            printMerchantSummary(std::cout, m_buyerName, m_buy, M_HP_COST);
             break;
         default:
-            printMerchantSummary(os, m_buyerName, m_buy, M_BUY_NOTHING);
+            printMerchantSummary(std::cout, m_buyerName, m_buy, M_BUY_NOTHING);
     }
 
 }

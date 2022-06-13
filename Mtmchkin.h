@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <fstream>
 
 #include "Cards/Card.h"
 #include "Cards/Barfight.h"

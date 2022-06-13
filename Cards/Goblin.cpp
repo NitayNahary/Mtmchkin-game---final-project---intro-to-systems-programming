@@ -5,15 +5,15 @@ void Goblin::applyEncounter(Player& player){
     if(player.getAttackStrength() >=m_force){
         player.levelUp();
         player.addCoins(m_loot);
-        printWinBattle(player.getName(), "Goblin");
+        printWinBattle(player.name(), "Goblin");
     }
     else
     {
         player.damage(m_damage);
-        printLossBattle(player.getName(), "Goblin");
+        printLossBattle(player.name(), "Goblin");
     }
 }
 
-void Goblin::printInfo(std::ostream& os) const {
-    printMonsterDetails(os,m_force,m_damage, m_loot, m_isDragon);
+void Goblin::printInfo() const {
+    printMonsterDetails(std::cout,m_force,m_damage, m_loot, m_isDragon);
 }

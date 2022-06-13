@@ -1,7 +1,5 @@
 #include "Player.h"
 #include "../MyUtilities.h"
-#include "../Exception.h"
-
 
 static int zeroNegativeNumbers(const int value){
     return (value > 0 ? value : 0);
@@ -22,11 +20,11 @@ std::ostream& operator<<(std::ostream& os,const Player& player){
     printPlayerDetails(os,player.m_name,job,player.m_level,player.m_force,player.m_HP,player.m_coins);
     return os;
 }
-std::string Player::getName(){
+std::string Player::name(){
     return m_name;
 }
 
-int Player::getCoins() {
+int Player::purse() {
     return m_coins;
 }
 
