@@ -3,9 +3,10 @@
 
 void Treasure::applyEncounter(Player &player) {
     player.addCoins(M_EFFECT_VALUE);
-    printInfo();
+    printTreasureMessage();
 }
 
 void Treasure::printInfo() const {
-    printTreasureMessage();
+    printCardDetails(std::cout, "Treasure");
+    printEndOfCardDetails(std::cout);
 }

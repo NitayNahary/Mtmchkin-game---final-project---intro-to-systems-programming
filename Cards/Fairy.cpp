@@ -8,9 +8,10 @@ void Fairy::applyEncounter(Player &player){
     if(m_isWizard){
         player.heal(M_EFFECT_VALUE);
     }
-    printInfo();
+    printFairyMessage(m_isWizard);
 }
 
 void Fairy::printInfo() const {
-    printFairyMessage(m_isWizard);
+    printCardDetails(std::cout, "Fairy");
+    printEndOfCardDetails(std::cout);
 }

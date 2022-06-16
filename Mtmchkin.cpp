@@ -24,8 +24,8 @@ static bool isActive(shared_ptr<Player> player){
 }
 
 Mtmchkin::Mtmchkin(const string& fileName){
-    readCards(fileName);
     printStartGameMessage();
+    readCards(fileName);
     try {
         initPlayers();
     }catch (EndOfFile& eof){
@@ -36,7 +36,7 @@ Mtmchkin::Mtmchkin(const string& fileName){
 }
 
 void Mtmchkin::readCards(const string& fileName){
-    std::fstream source(fileName);
+    std::fstream source(fileName, std::fstream::in);
     if(source.fail() || !source){
         throw DeckFileNotFound();
     }

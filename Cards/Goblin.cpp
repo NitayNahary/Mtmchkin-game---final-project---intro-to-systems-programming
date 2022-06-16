@@ -15,5 +15,7 @@ void Goblin::applyEncounter(Player& player){
 }
 
 void Goblin::printInfo() const {
+    printCardDetails(std::cout, "Goblin");
     printMonsterDetails(std::cout,m_force,m_damage, m_loot, m_isDragon);
+    printEndOfCardDetails(std::cout);
 }

@@ -16,5 +16,7 @@ void Vampire::applyEncounter(Player& player){
 }
 
 void Vampire::printInfo() const {
+    printCardDetails(std::cout, "Vampire");
     printMonsterDetails(std::cout,m_force,m_damage, m_loot, m_isDragon);
+    printEndOfCardDetails(std::cout);
 }

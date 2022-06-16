@@ -31,10 +31,6 @@ void Merchant::applyEncounter(Player &player) {
     if(!hadMoney) {
         printMerchantInsufficientCoins(std::cout);
     }
-    printInfo();
-}
-
-void Merchant::printInfo() const {
     switch(m_buy){
         case M_BUY_FORCE:
             printMerchantSummary(std::cout, m_buyerName, m_buy, M_FORCE_COST);
@@ -45,5 +41,10 @@ void Merchant::printInfo() const {
         default:
             printMerchantSummary(std::cout, m_buyerName, m_buy, M_BUY_NOTHING);
     }
+}
+
+void Merchant::printInfo() const {
+    printCardDetails(std::cout, "Merchant");
+    printEndOfCardDetails(std::cout);
 
 }
