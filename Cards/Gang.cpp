@@ -23,8 +23,8 @@ void Gang::applyEncounter(Player &player) {
             monster->applyLose(player);
         }
     }
-    if(lostOnce){
-        player.strengthen();
+    if(!lostOnce){
+        player.levelUp();
     }
 }
 
