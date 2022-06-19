@@ -5,10 +5,11 @@
 #include "Gang.h"
 
 void Gang::printInfo() const{
-    for(const std::unique_ptr<MonsterCard>& monster : m_gang){
-         Card* monsterCard = static_cast<Card*>(&*monster);
-         std::cout << monsterCard << std::endl;
-    }
+//    for(const std::unique_ptr<MonsterCard>& monster : m_gang){
+//         Card* monsterCard = static_cast<Card*>(&*monster);
+//         std::cout << monsterCard << std::endl;
+//    }
+    std::cerr<< "GangBANG" <<std::endl;
 }
 
 void Gang::applyEncounter(Player &player) {

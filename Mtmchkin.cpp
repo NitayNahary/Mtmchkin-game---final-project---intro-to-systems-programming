@@ -62,9 +62,8 @@ void Mtmchkin::readCards(const string& fileName){
 }
 int Mtmchkin::buildCard(const string& cardTypeIndex){
     unique_ptr<Card> cardType;
-    Gang* gang = m_deck.empty() ?  nullptr : dynamic_cast<Gang*>(&*m_deck.front());
+    Gang* gang = m_deck.empty() ?  nullptr : dynamic_cast<Gang*>(&(*m_deck.back()));
     int inputValidity = getCardType(cardType, cardTypeIndex);
-
     switch (inputValidity) {
         case INVALID_CARD:
             return INVALID_CARD;
