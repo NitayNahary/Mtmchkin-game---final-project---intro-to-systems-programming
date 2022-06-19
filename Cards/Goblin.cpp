@@ -20,5 +20,5 @@ void Goblin::applyLose(Player &player) {
 
 void Goblin::applyWinOnlyLoot(Player &player) {
     player.addCoins(m_loot);
-    printWinBattle(player.name(), "Goblin");
+    //printWinBattle(player.name(), "Goblin");
 }

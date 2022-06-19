@@ -21,6 +21,6 @@ void Vampire::applyLose(Player &player) {
 
 void Vampire::applyWinOnlyLoot(Player &player) {
     player.addCoins(m_loot);
-    printWinBattle(player.name(), "Vampire");
+   // printWinBattle(player.name(), "Vampire");
 }
 

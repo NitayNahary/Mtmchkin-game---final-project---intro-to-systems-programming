@@ -25,6 +25,7 @@ void Gang::applyEncounter(Player &player) {
     }
     if(!lostOnce){
         player.levelUp();
+        printWinBattle(player.name(), "Gang");
     }
 }
 

@@ -22,5 +22,5 @@ void Dragon::applyLose(Player &player) {
 
 void Dragon::applyWinOnlyLoot(Player &player) {
     player.addCoins(m_loot);
-    printWinBattle(player.name(), "Dragon");
+    //printWinBattle(player.name(), "Dragon");
 }
