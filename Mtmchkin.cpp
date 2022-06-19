@@ -16,6 +16,7 @@ using std::string;
 #define INVALID_CARD -1
 #define GANG_CARD 2
 #define ENDGANG_CARD 3
+
 static map<string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
                                               {"Dragon",   CardTypes::Dragon},
                                               {"Fairy",    CardTypes::Fairy},
@@ -92,31 +93,31 @@ int Mtmchkin::buildCard(const string& cardTypeIndex){
 int Mtmchkin::getCardType(unique_ptr<Card>& cardType, const string& cardTypeIndex){
     switch (CARD_LEXICON[cardTypeIndex]){
         case CardTypes::Barfight:
-            cardType = std::make_unique<Barfight>();
+            cardType = std::move(std::unique_ptr<Card>(new Barfight()));
             break;
         case CardTypes::Dragon:
-            cardType = std::make_unique<Dragon>();
+            cardType =std::move(std::unique_ptr<Card>(new Dragon()));
             break;
         case CardTypes::Fairy:
-            cardType = std::make_unique<Fairy>();
+            cardType = std::move(std::unique_ptr<Card>(new Fairy()));
             break;
         case CardTypes::Goblin:
-            cardType = std::make_unique<Goblin>();
+            cardType =std::move(std::unique_ptr<Card>(new Goblin()));
             break;
         case CardTypes::Merchant:
-            cardType = std::make_unique<Merchant>();
+            cardType = std::move(std::unique_ptr<Card>(new Merchant()));
             break;
         case CardTypes::Pitfall:
-            cardType = std::make_unique<Pitfall>();
+            cardType = std::move(std::unique_ptr<Card>(new Merchant()));
             break;
         case CardTypes::Treasure:
-            cardType = std::make_unique<Treasure>();
+            cardType = std::move(std::unique_ptr<Card>(new Treasure()));
             break;
         case CardTypes::Vampire:
-            cardType = std::make_unique<Vampire>();
+            cardType = std::move(std::unique_ptr<Card>(new Treasure()));
             break;
         case CardTypes::Gang:
-            cardType = std::make_unique<Gang>();
+            cardType = std::move(std::unique_ptr<Card>(new Gang()));
             return GANG_CARD;
         case CardTypes::EndGang:
             return ENDGANG_CARD;
