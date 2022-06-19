@@ -15,3 +15,7 @@ void Barfight::printInfo() const {
     printCardDetails(std::cout, "Barfight");
     printEndOfCardDetails(std::cout);
 }
+
+bool Barfight::isMonster() {
+    return false;
+}

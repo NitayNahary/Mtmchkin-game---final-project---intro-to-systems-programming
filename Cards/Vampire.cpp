@@ -20,3 +20,7 @@ void Vampire::printInfo() const {
     printMonsterDetails(std::cout,m_force,m_damage, m_loot, m_isDragon);
     printEndOfCardDetails(std::cout);
 }
+
+bool Vampire::isMonster() {
+    return true;
+}

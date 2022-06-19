@@ -13,7 +13,7 @@ public:
      *      void
     */
     void applyEncounter(Player& player) override;
-
+    bool isMonster() override;
 private:
     /*
      * Prints the card info:

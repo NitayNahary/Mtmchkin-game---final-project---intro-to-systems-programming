@@ -10,3 +10,7 @@ void Treasure::printInfo() const {
     printCardDetails(std::cout, "Treasure");
     printEndOfCardDetails(std::cout);
 }
+
+bool Treasure::isMonster() {
+    return false;
+}

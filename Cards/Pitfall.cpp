@@ -15,3 +15,7 @@ void Pitfall::printInfo() const {
     printCardDetails(std::cout, "Pitfall");
     printEndOfCardDetails(std::cout);
 }
+
+bool Pitfall::isMonster() {
+    return false;
+}

@@ -5,7 +5,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include <queue>
+#include <deque>
 #include "Cards/Card.h"
 #include "Cards/Barfight.h"
 #include "Cards/Dragon.h"
@@ -15,6 +15,7 @@
 #include "Cards/Vampire.h"
 #include "Cards/Pitfall.h"
 #include "Cards/Treasure.h"
+#include "Cards/Gang.h"
 
 #include "Players/Player.h"
 #include "Players/Fighter.h"
@@ -25,16 +26,14 @@
 #include "MyUtilities.h"
 #include <memory>
 
-#define VALID_INPUT 1
-#define INVALID_CLASS -2
-#define INVALID_NAME -1
-#define INVALID_CARD -1
+
+
 #define MIN_DECK_SIZE 5
 #define MIN_PLAYERS 2
 #define MAX_PLAYERS 6
 
 
-enum class CardTypes{notCard,Barfight , Dragon , Fairy , Goblin , Merchant , Treasure , Pitfall , Vampire};
+enum class CardTypes{notCard,Barfight , Dragon , Fairy , Goblin , Merchant , Treasure , Pitfall , Vampire, Gang, EndGang};
 enum class PlayerClass{notClass,Rogue , Wizard , Fighter};
 
 static const int WIN_CONDITION = 10;
@@ -78,15 +77,15 @@ public:
 
 
 private:
-    Queue<std::shared_ptr<Card>> m_deck;
-    Queue<std::shared_ptr<Player>> m_activePlayers;
-    Queue<std::shared_ptr<Player>> m_winPlayers;
-    Queue<std::shared_ptr<Player>> m_deadPlayers;
+    std::deque<std::unique_ptr<Card>> m_deck;
+    std::deque<std::unique_ptr<Player>> m_activePlayers;
+    std::deque<std::unique_ptr<Player>> m_winPlayers;
+    std::deque<std::unique_ptr<Player>> m_deadPlayers;
     int m_roundsPlayed;
     void readCards(const std::string& fileName);
     void initPlayers();
     int buildMyPlayer(const std::string& playerType, const std::string& name);
-    int buildMyCard(const std::string& cardTypeIndex);
+    int buildCard(const std::string& cardTypeIndex);
     /*
      * updates game status:
      *
@@ -94,8 +93,9 @@ private:
      * loss if player hp hit 0
      * midgame otherwise
      */
-    void updatePlayerStatus(const std::shared_ptr<Player>& player);
-};
+    bool changePlayerStatus(std::unique_ptr<Player>& player);
+    int getCardType(std::unique_ptr<Card>& cardType, const std::string& cardTypeIndex);
+    };
 
 
 #endif //HW4_MTMCHKIN_H

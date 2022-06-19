@@ -15,3 +15,7 @@ void Fairy::printInfo() const {
     printCardDetails(std::cout, "Fairy");
     printEndOfCardDetails(std::cout);
 }
+
+bool Fairy::isMonster() {
+    return false;
+}

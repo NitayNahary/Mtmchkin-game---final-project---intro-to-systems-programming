@@ -1,8 +1,21 @@
 
 #include "Mtmchkin.h"
+
+#include <memory>
 using std::shared_ptr;
+using std::unique_ptr;
 using std::map;
+using std::cerr;
+using std::endl;
 using std::string;
+
+
+#define VALID_INPUT 1
+#define INVALID_CLASS -2
+#define INVALID_NAME -1
+#define INVALID_CARD -1
+#define GANG_CARD 2
+#define ENDGANG_CARD 3
 static map<string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
                                               {"Dragon",   CardTypes::Dragon},
                                               {"Fairy",    CardTypes::Fairy},
@@ -10,18 +23,13 @@ static map<string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
                                               {"Merchant", CardTypes::Merchant},
                                               {"Treasure", CardTypes::Treasure},
                                               {"Pitfall",  CardTypes::Pitfall},
-                                              {"Vampire",  CardTypes::Vampire}};
+                                              {"Vampire",  CardTypes::Vampire},
+                                              {"Gang",     CardTypes::Gang},
+                                              {"EndGang",  CardTypes::EndGang}};
 
 static map<string, PlayerClass> CLASS_LEXICON = { {"Rogue",   PlayerClass::Rogue},
                                                   {"Wizard",  PlayerClass::Wizard},
                                                   {"Fighter", PlayerClass::Fighter}};
-
-static bool isActive(shared_ptr<Player> player){
-    if(player->isKnockedOut() || player->getLevel() == WIN_CONDITION){
-        return false;
-    }
-    return true;
-}
 
 Mtmchkin::Mtmchkin(const string& fileName){
     printStartGameMessage();
@@ -43,7 +51,7 @@ void Mtmchkin::readCards(const string& fileName){
     string lineText;
     for(int line = 1; !source.eof(); line++){
         std::getline(source , lineText);
-        if(buildMyCard(lineText) == INVALID_CARD && !source.eof()){
+        if(buildCard(lineText) == INVALID_CARD && !source.eof()){
             throw DeckFileFormatError(line);
         }
     }
@@ -51,7 +59,71 @@ void Mtmchkin::readCards(const string& fileName){
         throw DeckFileInvalidSize();
     }
 }
-
+int Mtmchkin::buildCard(const string& cardTypeIndex){
+    unique_ptr<Card> cardType;
+    Gang* gang = m_deck.front() ? dynamic_cast<Gang*>(&*m_deck.front()) : nullptr;
+    int inputValidity = getCardType(cardType, cardTypeIndex);
+    switch (inputValidity) {
+        case INVALID_CARD:
+            return INVALID_CARD;
+        case ENDGANG_CARD:
+            if(!gang || !gang->open()){
+                return INVALID_CARD;
+            }
+            gang->close();
+            break;
+        case GANG_CARD:
+            if(gang){
+                return INVALID_CARD;
+            }
+        default:
+            if(gang && gang->open()){
+                if(!cardType->isMonster()){
+                    return INVALID_CARD;
+                }
+                gang->pushBack(std::move(cardType));
+            }else{
+                m_deck.push_back(std::move(cardType));
+            }
+            return VALID_INPUT;
+    }
+}
+int Mtmchkin::getCardType(unique_ptr<Card>& cardType, const string& cardTypeIndex){
+    switch (CARD_LEXICON[cardTypeIndex]){
+        case CardTypes::Barfight:
+            cardType = std::make_unique<Barfight>();
+            break;
+        case CardTypes::Dragon:
+            cardType = std::make_unique<Dragon>();
+            break;
+        case CardTypes::Fairy:
+            cardType = std::make_unique<Fairy>();
+            break;
+        case CardTypes::Goblin:
+            cardType = std::make_unique<Goblin>();
+            break;
+        case CardTypes::Merchant:
+            cardType = std::make_unique<Merchant>();
+            break;
+        case CardTypes::Pitfall:
+            cardType = std::make_unique<Pitfall>();
+            break;
+        case CardTypes::Treasure:
+            cardType = std::make_unique<Treasure>();
+            break;
+        case CardTypes::Vampire:
+            cardType = std::make_unique<Vampire>();
+            break;
+        case CardTypes::Gang:
+            cardType = std::make_unique<Gang>();
+            return GANG_CARD;
+        case CardTypes::EndGang:
+            return ENDGANG_CARD;
+        default:
+            return INVALID_CARD;
+    }
+    return VALID_INPUT;
+}
 void Mtmchkin::initPlayers(){
     int numberOfPlayers;
     printEnterTeamSizeMessage();
@@ -85,13 +157,13 @@ void Mtmchkin::initPlayers(){
 int Mtmchkin::buildMyPlayer(const string& playerType , const string& name){
     switch (CLASS_LEXICON[playerType]){
         case PlayerClass::Wizard:
-            m_activePlayers.pushBack(shared_ptr<Player>(new Wizard(name)));
+            m_activePlayers.push_back(unique_ptr<Player>(new Wizard(name)));
             break;
         case PlayerClass::Rogue:
-            m_activePlayers.pushBack(shared_ptr<Player>(new Rogue(name)));
+            m_activePlayers.push_back(unique_ptr<Player>(new Rogue(name)));
             break;
         case PlayerClass::Fighter:
-            m_activePlayers.pushBack(shared_ptr<Player>(new Fighter(name)));
+            m_activePlayers.push_back(unique_ptr<Player>(new Fighter(name)));
             break;
         default:
             try {
@@ -104,66 +176,41 @@ int Mtmchkin::buildMyPlayer(const string& playerType , const string& name){
     return VALID_INPUT;
 }
 
-int Mtmchkin::buildMyCard(const string& cardTypeIndex){
-    switch (CARD_LEXICON[cardTypeIndex]){
-        case CardTypes::Barfight:
-            m_deck.pushBack(shared_ptr<Card>(new Barfight()));
-            break;
-        case CardTypes::Dragon:
-            m_deck.pushBack(shared_ptr<Card>(new Dragon()));
-            break;
-        case CardTypes::Fairy:
-            m_deck.pushBack(shared_ptr<Card>(new Fairy()));
-            break;
-        case CardTypes::Goblin:
-            m_deck.pushBack(shared_ptr<Card>(new Goblin()));
-            break;
-        case CardTypes::Merchant:
-            m_deck.pushBack(shared_ptr<Card>(new Merchant()));
-            break;
-        case CardTypes::Pitfall:
-            m_deck.pushBack(shared_ptr<Card>(new Pitfall()));
-            break;
-        case CardTypes::Treasure:
-            m_deck.pushBack(shared_ptr<Card>(new Treasure()));
-            break;
-        case CardTypes::Vampire:
-            m_deck.pushBack(shared_ptr<Card>(new Vampire()));
-            break;
-        default:
-            return INVALID_CARD;
-    }
-    return VALID_INPUT;
-}
 
-void Mtmchkin::updatePlayerStatus(const shared_ptr<Player>& player){
+bool Mtmchkin::changePlayerStatus(unique_ptr<Player>& player){
     if(player->isKnockedOut()){
-        m_deadPlayers.push(player);
+        m_deadPlayers.push_front(std::move(player));
     }else if(player->getLevel() == WIN_CONDITION){
-        m_winPlayers.pushBack(player);
+        m_winPlayers.push_back(std::move(player));
+    }else{
+        return false;
     }
+    return true;
 }
 
 ///---------------------------------------------PUBLIC FUNCTIONS-----------------------------------------------------------
 
 void Mtmchkin::playRound(){
     printRoundStartMessage(++m_roundsPlayed);
-    for(shared_ptr<Player> player : m_activePlayers){
-        printTurnStartMessage(player->name());
-        shared_ptr<Card> playingCard = m_deck.front();
-        playingCard->applyEncounter(*player);
-        updatePlayerStatus(player);
-        m_deck.popFront();
-        m_deck.pushBack(playingCard);
+    for(int i = 0; i < m_activePlayers.size(); i++){
+        printTurnStartMessage(m_activePlayers[i]->name());
+        unique_ptr<Card> playingCard = std::move(m_deck.front());
+        playingCard->applyEncounter(*m_activePlayers[i]);
+
+        if(changePlayerStatus(m_activePlayers[i])){
+            m_activePlayers.erase(m_activePlayers.begin()+i);
+            i--;
+        }
+        m_deck.pop_front();
+        m_deck.push_back(std::move(playingCard));
     }
-    m_activePlayers = filter(m_activePlayers, isActive);
     if(isGameOver()){
         printGameEndMessage();
     }
 }
 
 bool Mtmchkin::isGameOver() const{
-    if(m_activePlayers.size() == 0){
+    if(m_activePlayers.empty()){
         return true;
     }
     return false;
@@ -176,15 +223,15 @@ int Mtmchkin::getNumberOfRounds() const {
 void Mtmchkin::printLeaderBoard() const {
     printLeaderBoardStartMessage();
     int i = 1;
-    for(shared_ptr<Player> player : m_winPlayers){
+    for(const unique_ptr<Player>& player : m_winPlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }
-    for(shared_ptr<Player> player : m_activePlayers){
+    for(const unique_ptr<Player>& player : m_activePlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }
-    for(shared_ptr<Player> player : m_deadPlayers){
+    for(const unique_ptr<Player>& player : m_deadPlayers){
         printPlayerLeaderBoard(i, *player);
         i++;
     }

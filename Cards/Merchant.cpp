@@ -48,3 +48,7 @@ void Merchant::printInfo() const {
     printEndOfCardDetails(std::cout);
 
 }
+
+bool Merchant::isMonster() {
+    return false;
+}

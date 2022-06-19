@@ -23,6 +23,7 @@ public:
     */
     virtual void applyEncounter(Player& player) = 0;
 
+    virtual bool isMonster() = 0;
     //operator << prints the players details in this format:
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
 
