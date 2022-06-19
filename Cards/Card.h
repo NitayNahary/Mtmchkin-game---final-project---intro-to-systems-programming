@@ -23,7 +23,14 @@ public:
     */
     virtual void applyEncounter(Player& player) = 0;
 
+    /*
+     * Check if the card is a monster card
+     *
+     * @return
+     *      bool - true/false
+    */
     virtual bool isMonster() = 0;
+
     //operator << prints the players details in this format:
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
 

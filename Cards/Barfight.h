@@ -5,6 +5,11 @@
 
 class Barfight : public Card{
 public:
+    /*
+     * Empty C'tor
+     *      @return
+     *          An instance of Barfight card
+    */
     Barfight();
     /*
      * Handling the player's applyEncounter with the card:
@@ -14,6 +19,12 @@ public:
      *      void
     */
     void applyEncounter(Player &player) override;
+    /*
+     * Check if the card is a monster card
+     *
+     * @return
+     *      false
+    */
     bool isMonster() override;
 private:
     /*

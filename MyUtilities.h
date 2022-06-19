@@ -13,10 +13,37 @@
 
 /* ---------------------------------------------------------------------------------------------- */
 
+/*
+*  Get a int input number between start and end of a specific range
+*   @param
+*           dest - a reference to the input parameter
+*           startOfRange - the min value of the input
+*           EndOfRange - the max value of the input
+*           invalidError -
+*
+*  @return
+*          int - number of rounds played
+*/
 void getIntInputNumber(int& dest, int startOfRange = -INT_MAX, int endOfRange = INT_MAX , void invalidError() = printInvalidInput);
 
+/*
+*  Get a string input number between start and end of a specific range
+*   @param
+*           dest - a reference to the input parameter
+*           invalidError -
+*
+*  @return
+*          int - number of rounds played
+*/
 void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
-
+/*
+*  Check if a name is a valid name
+*   @param
+*           name - a name
+*
+*  @return
+*          bool - true/false
+*/
 bool isValidName(const std::string& name);
 
 #endif //MY_UTIL_H
