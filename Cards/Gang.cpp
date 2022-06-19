@@ -13,13 +13,13 @@ void Gang::printInfo() const{
 
 void Gang::applyEncounter(Player &player) {
     bool lostOnce = false;
-    for(int i = 0; i < m_gang.size(); i++){
+    for(const std::unique_ptr<MonsterCard>& monster : m_gang){
         if(!lostOnce) {
-            if (!m_gang[i]->applyEncounterGangMembers(player)) {
+            if (!monster->applyEncounterGangMembers(player)) {
                 lostOnce = true;
             }
         }else{
-            m_gang[i]->applyLose(player);
+            monster->applyLose(player);
         }
     }
 }

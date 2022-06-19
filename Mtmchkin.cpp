@@ -96,7 +96,7 @@ int Mtmchkin::getCardType(unique_ptr<Card>& cardType, const string& cardTypeInde
             cardType = std::move(std::unique_ptr<Card>(new Barfight()));
             break;
         case CardTypes::Dragon:
-            cardType =std::move(std::unique_ptr<Card>(new Dragon()));
+            cardType = std::move(std::unique_ptr<Card>(new Dragon()));
             break;
         case CardTypes::Fairy:
             cardType = std::move(std::unique_ptr<Card>(new Fairy()));
@@ -194,7 +194,7 @@ bool Mtmchkin::changePlayerStatus(unique_ptr<Player>& player){
 
 void Mtmchkin::playRound(){
     printRoundStartMessage(++m_roundsPlayed);
-    for(int i = 0; i < m_activePlayers.size(); i++){
+    for(std::size_t i = 0; i < m_activePlayers.size(); i++){
         printTurnStartMessage(m_activePlayers[i]->name());
         unique_ptr<Card> playingCard = std::move(m_deck.front());
         playingCard->applyEncounter(*m_activePlayers[i]);
