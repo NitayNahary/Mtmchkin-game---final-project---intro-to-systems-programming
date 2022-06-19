@@ -9,7 +9,7 @@ void Gang::printInfo() const{
 //         Card* monsterCard = static_cast<Card*>(&*monster);
 //         std::cout << monsterCard << std::endl;
 //    }
-    std::cerr<< "GangBANG" <<std::endl;
+//    std::cerr<< "GangBANG" <<std::endl;
 }
 
 void Gang::applyEncounter(Player &player) {
@@ -22,6 +22,9 @@ void Gang::applyEncounter(Player &player) {
         }else{
             monster->applyLose(player);
         }
+    }
+    if(lostOnce){
+        player.strengthen();
     }
 }
 
