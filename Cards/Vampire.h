@@ -1,8 +1,8 @@
 #ifndef HW4_VAMPIRE_H
 #define HW4_VAMPIRE_H
 #include "Card.h"
-
-class Vampire : public Card{
+#include "MonsterCard.h"
+class Vampire : public MonsterCard{
 public:
     /*
      * Handling the player's applyEncounter with the card:
@@ -11,9 +11,12 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
-    bool isMonster() override;
+    void applyWin(Player& player) override;
+    void applyWinOnlyLoot(Player& player) override;
+    void applyLose(Player& player) override;
+    Vampire() : MonsterCard(10,2,10,false){}
 private:
+
     /*
      * Prints the card info:
      *
@@ -21,11 +24,6 @@ private:
      *      void
     */
     void printInfo() const override;
-
-    static const int m_force = 10;
-    static const int m_loot = 2 ;
-    static const int m_damage = 10;
-    const bool m_isDragon = false;
 };
 
 

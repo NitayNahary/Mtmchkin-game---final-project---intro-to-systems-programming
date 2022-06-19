@@ -1,8 +1,8 @@
 #ifndef HW4_DRAGON_H
 #define HW4_DRAGON_H
 #include "Card.h"
-
-class Dragon : public Card{
+#include "MonsterCard.h"
+class Dragon : public MonsterCard{
 public:
     /*
      * Handling the player's applyEncounter with the card:
@@ -11,9 +11,12 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
-    bool isMonster() override;
+    void applyWin(Player& player) override;
+    void applyWinOnlyLoot(Player& player) override;
+    void applyLose(Player& player) override;
+    Dragon() : MonsterCard(25,1000,1000000,true){}
 private:
+
     /*
      * Prints the card info:
      *
@@ -22,10 +25,6 @@ private:
     */
     void printInfo() const override;
 
-    static const int m_force = 25;
-    static const int m_loot = 1000 ;
-    static const int m_damage = 1000000;
-    const bool m_isDragon = true;
 };
 
 #endif //HW4_DRAGON_H

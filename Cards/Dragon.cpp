@@ -1,19 +1,5 @@
 
 #include "Dragon.h"
-void Dragon::applyEncounter(Player& player){
-    if(player.getAttackStrength() >=m_force){
-        player.levelUp();
-        player.addCoins(m_loot);
-        printWinBattle(player.name(), "Dragon");
-    }
-    else
-    {
-        while(!player.isKnockedOut()){
-            player.damage(m_damage);
-        }
-        printLossBattle(player.name(), "Dragon");
-    }
-}
 
 void Dragon::printInfo() const {
     printCardDetails(std::cout, "Dragon");
@@ -21,6 +7,20 @@ void Dragon::printInfo() const {
     printEndOfCardDetails(std::cout);
 }
 
-bool Dragon::isMonster() {
-    return true;
+void Dragon::applyWin(Player &player) {
+    player.levelUp();
+    player.addCoins(m_loot);
+    printWinBattle(player.name(), "Dragon");
+}
+
+void Dragon::applyLose(Player &player) {
+    while(!player.isKnockedOut()){
+        player.damage(m_damage);
+    }
+    printLossBattle(player.name(), "Dragon");
+}
+
+void Dragon::applyWinOnlyLoot(Player &player) {
+    player.addCoins(m_loot);
+    printWinBattle(player.name(), "Dragon");
 }

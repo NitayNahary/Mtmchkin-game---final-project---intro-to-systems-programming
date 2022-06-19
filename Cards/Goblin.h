@@ -2,8 +2,8 @@
 #ifndef HW4_GOBLIN_H
 #define HW4_GOBLIN_H
 #include "Card.h"
-
-class Goblin : public Card{
+#include "MonsterCard.h"
+class Goblin : public MonsterCard{
 public:
     /*
      * Handling the player's applyEncounter with the card:
@@ -12,9 +12,12 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
-    bool isMonster() override;
+    void applyWin(Player& player) override;
+    void applyWinOnlyLoot(Player& player) override;
+    void applyLose(Player& player) override;
+    Goblin() : MonsterCard(6,2,10,false){}
 private:
+
     /*
      * Prints the card info:
      *
@@ -23,10 +26,6 @@ private:
     */
     void printInfo() const override;
 
-    static const int m_force = 6;
-    static const int m_loot = 2 ;
-    static const int m_damage = 10;
-    const bool m_isDragon = false;
 };
 
 
