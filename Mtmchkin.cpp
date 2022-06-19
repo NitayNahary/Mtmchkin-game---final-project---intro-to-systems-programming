@@ -108,7 +108,7 @@ int Mtmchkin::getCardType(unique_ptr<Card>& cardType, const string& cardTypeInde
             cardType = std::move(std::unique_ptr<Card>(new Merchant()));
             break;
         case CardTypes::Pitfall:
-            cardType = std::move(std::unique_ptr<Card>(new Gang()));
+            cardType = std::move(std::unique_ptr<Card>(new Pitfall()));
             break;
         case CardTypes::Treasure:
             cardType = std::move(std::unique_ptr<Card>(new Treasure()));
