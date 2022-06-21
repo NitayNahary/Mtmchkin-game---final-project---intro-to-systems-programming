@@ -30,11 +30,11 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
         try {
             inputAsInt = std::stoi(input, &st);
             outRange = (inputAsInt < startOfRange || inputAsInt > endOfRange);
-            if(outRange) {
-                invalidError();
-            }
         }catch(std::out_of_range& a){
             outRange = true;
+        }
+        if(outRange) {
+            invalidError();
         }
     } while (outRange);
     dest = inputAsInt;
