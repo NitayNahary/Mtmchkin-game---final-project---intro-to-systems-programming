@@ -11,9 +11,9 @@ using std::string;
 
 
 #define VALID_INPUT 1
-#define INVALID_CLASS -2
-#define INVALID_NAME -1
-#define INVALID_CARD -1
+#define INVALID_CLASS (-2)
+#define INVALID_NAME (-1)
+#define INVALID_CARD (-1)
 #define GANG_CARD 2
 #define ENDGANG_CARD 3
 
@@ -32,6 +32,10 @@ static map<string, PlayerClass> CLASS_LEXICON = { {"Rogue",   PlayerClass::Rogue
                                                   {"Wizard",  PlayerClass::Wizard},
                                                   {"Fighter", PlayerClass::Fighter}};
 
+static void printTeamErrors(){
+    printInvalidTeamSize();
+    printEnterTeamSizeMessage();
+}
 Mtmchkin::Mtmchkin(const string& fileName){
     printStartGameMessage();
     readCards(fileName);
@@ -128,7 +132,7 @@ int Mtmchkin::getCardType(unique_ptr<Card>& cardType, const string& cardTypeInde
 void Mtmchkin::initPlayers(){
     int numberOfPlayers;
     printEnterTeamSizeMessage();
-    getIntInputNumber(numberOfPlayers, MIN_PLAYERS, MAX_PLAYERS, printInvalidTeamSize);
+    getIntInputNumber(numberOfPlayers, MIN_PLAYERS, MAX_PLAYERS, printTeamErrors);
 
     bool badInputFlag = false;
     for(int i = 0; i < numberOfPlayers; badInputFlag ? i : i++){
