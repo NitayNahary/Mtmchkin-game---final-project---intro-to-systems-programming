@@ -46,4 +46,5 @@ void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
 */
 bool isValidName(const std::string& name);
 
+void printTeamErrors();
 #endif //MY_UTIL_H

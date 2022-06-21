@@ -32,10 +32,7 @@ static map<string, PlayerClass> CLASS_LEXICON = { {"Rogue",   PlayerClass::Rogue
                                                   {"Wizard",  PlayerClass::Wizard},
                                                   {"Fighter", PlayerClass::Fighter}};
 
-static void printTeamErrors(){
-    printInvalidTeamSize();
-    printEnterTeamSizeMessage();
-}
+
 Mtmchkin::Mtmchkin(const string& fileName){
     printStartGameMessage();
     readCards(fileName);

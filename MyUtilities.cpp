@@ -3,33 +3,37 @@
 using std::string;
 #define FAIL_BUFFER 256
 
-
+void printTeamErrors(){
+    printInvalidTeamSize();
+    printEnterTeamSizeMessage();
+}
 
 void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalidError()){
     std::string input;
     int inputAsInt;
-    bool inRange = false;
+    bool outRange = false;
     do {
         std::getline(std::cin, input);
-        //std::cerr << "1: " << input << std::endl;
         while (std::cin.fail() || input.find_first_not_of("0123456789") != std::string::npos) {
             if(std::cin.eof()){
                 throw EndOfFile();
             }
             invalidError();
             std::cin.clear();
-            //std::cin.ignore(FAIL_BUFFER, '\n');
+            if(std::cin.fail()){
+                std::cin.ignore(FAIL_BUFFER, '\n');
+            }
             std::getline(std::cin, input);
-           // std::cerr << "2: " << input << std::endl;
         }
         std::string::size_type st;
         inputAsInt = std::stoi(input, &st);
-        if( inputAsInt < startOfRange || inputAsInt > endOfRange){
-            inRange = true;
-        }else{
+        if(inputAsInt < startOfRange || inputAsInt > endOfRange){
             invalidError();
+            outRange = true;
+        }else{
+            outRange = false;
         }
-    } while (!inRange);
+    } while (outRange);
     dest = inputAsInt;
 }
 void getStringInput(string& dest, void invalidError()){
