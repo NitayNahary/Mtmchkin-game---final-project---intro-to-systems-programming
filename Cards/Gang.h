@@ -26,6 +26,9 @@ class Gang : public Card{
      *          An instance of Gang card
     */
     Gang();
+    Gang(const Gang& src);
+    Gang& operator=(const Gang& src);
+    ~Gang() override = default;
     /*
      * Handling the player's applyEncounter with the card:
      *
@@ -33,7 +36,7 @@ class Gang : public Card{
      * @return
      *      void
     */
-    void applyEncounter(Player& player) override;
+    void applyEncounter(Player& player) const override;
     /*
      * Adds a monster to the gang
      *
@@ -47,7 +50,7 @@ class Gang : public Card{
      * @return
      *      false
     */
-    bool isMonster() override;
+    bool isMonster() const override;
     //initialize m_open to true
     bool open() const;
     //initialize m_open to close

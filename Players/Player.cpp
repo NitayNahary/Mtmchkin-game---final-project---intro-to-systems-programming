@@ -5,14 +5,10 @@ static int zeroNegativeNumbers(const int value){
     return (value > 0 ? value : 0);
 }
 
-Player::Player(const std::string name) :  m_level(STARTING_LEVEL), m_force(DEFAULT_FORCE),
+Player::Player(const std::string name) :  m_name(isValidName(name) ? name : throw InvalidName()),
+                                    m_level(STARTING_LEVEL), m_force(DEFAULT_FORCE),
                                     m_HP(DEFAULT_MAXHP), m_maxHP(DEFAULT_MAXHP), m_coins(STARTING_COINS)
-{
-    if(isValidName(name)){
-        m_name = name;
-    }else
-        throw InvalidName();
-}
+{}
 //--------------------------------------------------------------------------------------------------------------------//
 
 std::ostream& operator<<(std::ostream& os,const Player& player){
@@ -20,11 +16,11 @@ std::ostream& operator<<(std::ostream& os,const Player& player){
     printPlayerDetails(os,player.m_name,job,player.m_level,player.m_force,player.m_HP,player.m_coins);
     return os;
 }
-std::string Player::name(){
+std::string Player::name() const{
     return m_name;
 }
 
-int Player::purse() {
+int Player::purse() const{
     return m_coins;
 }
 
@@ -36,10 +32,6 @@ void Player::levelUp(){
 
 int Player::getLevel() const{
     return m_level;
-}
-
-void Player::buff(const int strUp){
-    m_force += zeroNegativeNumbers(strUp);
 }
 
 void Player::heal(const int hpUp){

@@ -6,7 +6,6 @@
 #define SELL_END_INPUT_RANGE 2
 class Merchant : public Card {
 public:
-    Merchant();
     /*
      * Handling the player's applyEncounter with the card:
      *
@@ -14,7 +13,7 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player &player) override;
+    void applyEncounter(Player &player) const override;
 
     /*
      * Check if the card is a monster card
@@ -22,7 +21,7 @@ public:
      * @return
      *      false
     */
-    bool isMonster() override;
+    bool isMonster() const override;
 private:
     /*
      * Prints the card info:
@@ -38,8 +37,6 @@ private:
     static const int M_BUY_NOTHING = 0;
     static const int M_BUY_HP = 1;
     static const int M_BUY_FORCE = 2;
-    int m_buy;
-    std::string m_buyerName;
 };
 
 

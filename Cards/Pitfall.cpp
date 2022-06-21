@@ -1,15 +1,12 @@
 
 #include "Pitfall.h"
-static const std::string M_NAME = "Pitfall";
 
-Pitfall::Pitfall() : m_isRogue(false){}
-
-void Pitfall::applyEncounter(Player &player){
-    m_isRogue = player.getClass() == "Rogue";
-    if(!m_isRogue) {
+void Pitfall::applyEncounter(Player &player) const{
+    bool isRogue = player.getClass() == "Rogue";
+    if(!isRogue) {
         player.damage(M_EFFECT_VALUE);
     }
-    printPitfallMessage(m_isRogue);
+    printPitfallMessage(isRogue);
 }
 
 void Pitfall::printInfo() const {
@@ -17,6 +14,6 @@ void Pitfall::printInfo() const {
     printEndOfCardDetails(std::cout);
 }
 
-bool Pitfall::isMonster() {
+bool Pitfall::isMonster() const{
     return false;
 }

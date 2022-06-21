@@ -6,19 +6,13 @@
 class Fairy : public Card {
 public:
     /*
-     * Empty C'tor
-     *      @return
-     *          An instance of Fairy card
-    */
-    Fairy();
-    /*
      * Handling the player's applyEncounter with the card:
      *
      * @param player - The player.
      * @return
      *      void
     */
-    void applyEncounter(Player &player) override;
+    void applyEncounter(Player &player) const override;
 
     /*
      * Check if the card is a monster card
@@ -26,7 +20,7 @@ public:
      * @return
      *      false
     */
-    bool isMonster() override;
+    bool isMonster() const override;
 private:
     /*
      * Prints the card info:
@@ -37,7 +31,6 @@ private:
     void printInfo() const override;
 
     static const int M_EFFECT_VALUE = 10;
-    bool m_isWizard;
 };
 
 #endif //HW4_FAIRY_H

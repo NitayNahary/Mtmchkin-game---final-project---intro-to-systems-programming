@@ -7,18 +7,18 @@ void Goblin::printInfo() const {
     printEndOfCardDetails(std::cout);
 }
 
-void Goblin::applyWin(Player &player) {
+void Goblin::applyWin(Player &player) const{
     player.levelUp();
     player.addCoins(m_loot);
     printWinBattle(player.name(), "Goblin");
 }
 
-void Goblin::applyLose(Player &player) {
+void Goblin::applyLose(Player &player) const{
     player.damage(m_damage);
     printLossBattle(player.name(), "Goblin");
 }
 
-void Goblin::applyWinOnlyLoot(Player &player) {
+void Goblin::applyWinOnlyLoot(Player &player) const{
     player.addCoins(m_loot);
     //printWinBattle(player.name(), "Goblin");
 }

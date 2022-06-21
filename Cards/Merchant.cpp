@@ -1,15 +1,14 @@
 
 #include "Merchant.h"
 
-Merchant::Merchant() : m_buy(-1){}
-
-void Merchant::applyEncounter(Player &player) {
-    m_buyerName = player.name();
-    printMerchantInitialMessageForInteractiveEncounter(std::cout, m_buyerName, player.purse());
-    getIntInputNumber(m_buy, SELL_START_INPUT_RANGE, SELL_END_INPUT_RANGE);
+void Merchant::applyEncounter(Player &player) const{
+    std::string name = player.name();
+    int itemType = -1;
+    printMerchantInitialMessageForInteractiveEncounter(std::cout, name, player.purse());
+    getIntInputNumber(itemType, SELL_START_INPUT_RANGE, SELL_END_INPUT_RANGE);
 
     bool hadMoney = false;
-    switch(m_buy){
+    switch(itemType){
         case M_BUY_FORCE:
             if(player.pay(M_FORCE_COST)){
                 player.strengthen();
@@ -31,15 +30,15 @@ void Merchant::applyEncounter(Player &player) {
     if(!hadMoney) {
         printMerchantInsufficientCoins(std::cout);
     }
-    switch(m_buy){
+    switch(itemType){
         case M_BUY_FORCE:
-            printMerchantSummary(std::cout, m_buyerName, m_buy, hadMoney ? M_FORCE_COST : M_BUY_NOTHING);
+            printMerchantSummary(std::cout, name, itemType, hadMoney ? M_FORCE_COST : M_BUY_NOTHING);
             break;
         case M_BUY_HP:
-            printMerchantSummary(std::cout, m_buyerName, m_buy, hadMoney ? M_HP_COST : M_BUY_NOTHING);
+            printMerchantSummary(std::cout, name, itemType, hadMoney ? M_HP_COST : M_BUY_NOTHING);
             break;
         default:
-            printMerchantSummary(std::cout, m_buyerName, m_buy, M_BUY_NOTHING);
+            printMerchantSummary(std::cout, name, itemType, M_BUY_NOTHING);
     }
 }
 
@@ -49,6 +48,6 @@ void Merchant::printInfo() const {
 
 }
 
-bool Merchant::isMonster() {
+bool Merchant::isMonster() const{
     return false;
 }

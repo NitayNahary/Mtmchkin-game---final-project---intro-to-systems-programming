@@ -14,6 +14,13 @@ class Card {
     */
     virtual void printInfo() const = 0;
 public:
+    //Default C'tors
+    Card() = default;
+    Card(const Card& src) = default;
+    Card& operator=(const Card& src) = default;
+    //Default D'tor
+    virtual ~Card() = default;
+
     /* Virtual function
      * Handling the player's applyEncounter with the card:
      *
@@ -21,7 +28,7 @@ public:
      * @return
      *      void
     */
-    virtual void applyEncounter(Player& player) = 0;
+    virtual void applyEncounter(Player& player) const = 0;
 
     /*
      * Check if the card is a monster card
@@ -29,13 +36,11 @@ public:
      * @return
      *      bool - true/false
     */
-    virtual bool isMonster() = 0;
+    virtual bool isMonster() const = 0;
 
     //operator << prints the players details in this format:
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
 
-    //Default D'tor
-    virtual ~Card() = default;
 };
 
 #endif //EX4_Card_H

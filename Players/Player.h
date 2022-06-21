@@ -40,19 +40,16 @@ public:
     virtual std::string getClass() const = 0;
 
     //@returns player name
-    std::string name();
+    std::string name() const;
 
     //@returns player coins
-    int purse();
+    int purse() const;
 
     //@returns player level
     int getLevel() const;
 
     //increment player level by 1
     void levelUp();
-
-    //increments player force by @param strUp
-    void buff(const int strUp);
 
     //increments players HP by @param hpUp. Up to players maxHp
     virtual void heal(const int hpUp);
@@ -90,7 +87,7 @@ public:
 
 //----------------------------PLAYER STATS---------------------------------
 private:
-    std::string m_name; // player name
+    const std::string m_name; // player name
 
 protected:
     int m_level; // player level

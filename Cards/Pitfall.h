@@ -5,8 +5,6 @@
 
 class Pitfall : public Card{
 public:
-
-    Pitfall();
     /*
      * Handling the player's applyEncounter with the card:
      *
@@ -14,7 +12,7 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player &player) override;
+    void applyEncounter(Player &player) const override;
 
     /*
      * Check if the card is a monster card
@@ -22,7 +20,7 @@ public:
      * @return
      *      false
     */
-    bool isMonster() override;
+    bool isMonster() const override;
 private:
     /*
      * Prints the card info:
@@ -31,9 +29,7 @@ private:
      *      void
     */
     void printInfo() const override;
-
     static const int M_EFFECT_VALUE = 10;
-    bool m_isRogue;
 };
 
 

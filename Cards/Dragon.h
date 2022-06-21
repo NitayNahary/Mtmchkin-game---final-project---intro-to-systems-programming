@@ -11,7 +11,7 @@ public:
      * @return
      *      void
     */
-    void applyWin(Player& player) override;
+    void applyWin(Player& player) const override;
 
     /*
      * Applying a win sequence on the card only with loot
@@ -20,7 +20,7 @@ public:
      * @return
      *      void
     */
-    void applyWinOnlyLoot(Player& player) override;
+    void applyWinOnlyLoot(Player& player) const override;
 
     /*
      * Operates a loss sequence on the card
@@ -29,7 +29,7 @@ public:
      * @return
      *      void
     */
-    void applyLose(Player& player) override;
+    void applyLose(Player& player) const override;
     /*
     * Empty C'tor of Dragon card
     *
@@ -42,7 +42,10 @@ public:
     * @return
     *      A new instance of Dragon.
     */
-    Dragon() : MonsterCard(25,1000,1000000,true){}
+    Dragon() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+    Dragon(const Dragon& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+    Dragon& operator=(const Dragon& src){return *this;}
+    ~Dragon() override = default;
 private:
 
     /*
@@ -52,7 +55,10 @@ private:
      *      void
     */
     void printInfo() const override;
-
+    static const int M_FORCE = 25;
+    static const int M_LOOT = 1000;
+    static const int M_DAMAGE = 1000000;
+    static const bool M_ISDRAGON = true;
 };
 
 #endif //HW4_DRAGON_H

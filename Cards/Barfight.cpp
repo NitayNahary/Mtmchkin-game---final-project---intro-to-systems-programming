@@ -1,14 +1,12 @@
 
 #include "Barfight.h"
 
-Barfight::Barfight() : m_isFighter(false){}
-
-void Barfight::applyEncounter(Player &player){
-    m_isFighter = player.getClass() == "Fighter";
-    if(!m_isFighter) {
+void Barfight::applyEncounter(Player &player) const{
+    bool isFighter = player.getClass() == "Fighter";
+    if(!isFighter) {
         player.damage(M_EFFECT_VALUE);
     }
-    printBarfightMessage(m_isFighter);
+    printBarfightMessage(isFighter);
 }
 
 void Barfight::printInfo() const {
@@ -16,6 +14,6 @@ void Barfight::printInfo() const {
     printEndOfCardDetails(std::cout);
 }
 
-bool Barfight::isMonster() {
+bool Barfight::isMonster() const{
     return false;
 }

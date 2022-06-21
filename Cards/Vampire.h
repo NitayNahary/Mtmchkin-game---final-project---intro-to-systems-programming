@@ -11,7 +11,7 @@ public:
      * @return
      *      void
     */
-    void applyWin(Player& player) override;
+    void applyWin(Player& player) const override;
 
     /*
      * Applying a win sequence on the card only with loot
@@ -20,7 +20,7 @@ public:
      * @return
      *      void
     */
-    void applyWinOnlyLoot(Player& player) override;
+    void applyWinOnlyLoot(Player& player) const override;
 
     /*
      * Operates a loss sequence on the card
@@ -29,7 +29,7 @@ public:
      * @return
      *      void
     */
-    void applyLose(Player& player) override;
+    void applyLose(Player& player) const override;
 
     /*
     * Empty C'tor of Vampire card
@@ -43,7 +43,10 @@ public:
     * @return
     *      A new instance of Vampire.
     */
-    Vampire() : MonsterCard(10,2,10,false){}
+    Vampire() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+    Vampire(const Vampire& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+    Vampire& operator=(const Vampire& src){return *this;}
+    ~Vampire() override = default;
 private:
 
     /*
@@ -53,6 +56,10 @@ private:
      *      void
     */
     void printInfo() const override;
+    static const int M_FORCE = 10;
+    static const int M_LOOT = 2;
+    static const int M_DAMAGE = 10;
+    static const bool M_ISDRAGON = false;
 };
 
 

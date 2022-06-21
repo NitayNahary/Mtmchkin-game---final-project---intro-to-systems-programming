@@ -32,7 +32,10 @@ public:
     *      A new instance of MonsterCard.
     */
     MonsterCard(int force, int loot,int damage, bool isDragon);
-
+    MonsterCard(const MonsterCard& src) = delete;
+    MonsterCard& operator=(const MonsterCard& src) = delete;
+    //Default D'tor
+    virtual ~MonsterCard() override = default;
     /*
      * Operates a win sequence on the card
      *
@@ -40,7 +43,7 @@ public:
      * @return
      *      void
     */
-    virtual void applyWin(Player& player) = 0;
+    virtual void applyWin(Player& player) const = 0;
     /*
      * Applying a win sequence on the card only with loot
      *
@@ -48,7 +51,7 @@ public:
      * @return
      *      void
     */
-    virtual void applyWinOnlyLoot(Player& player) = 0;
+    virtual void applyWinOnlyLoot(Player& player) const = 0;
     /*
      * Operates a loss sequence on the card
      *
@@ -56,21 +59,21 @@ public:
      * @return
      *      void
     */
-    virtual void applyLose(Player& player) = 0;
+    virtual void applyLose(Player& player) const = 0;
     /* Handling the player's applyEncounter with the card:
     *
     * @param player - The player.
     * @return
     *      void
     */
-    void applyEncounter(Player& player) override;
+    void applyEncounter(Player& player) const override;
     /* Handling the player's applyEncounter with the card only with a Gang:
     *
     * @param player - The player.
     * @return
     *      void
     */
-    bool applyEncounterGangMembers(Player &player);
+    bool applyEncounterGangMembers(Player &player) const;
     //operator << prints the players details in this format:
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
     /*
@@ -79,9 +82,8 @@ public:
      * @return
      *      false
     */
-    bool isMonster() override;
-    //Default D'tor
-    virtual ~MonsterCard() override = default;
+    bool isMonster() const override;
+
 };
 
 

@@ -12,7 +12,7 @@ public:
      * @return
      *      void
     */
-    void applyEncounter(Player &player) override;
+    void applyEncounter(Player &player) const override;
 
     /*
      * Check if the card is a monster card
@@ -20,7 +20,7 @@ public:
      * @return
      *      false
     */
-    bool isMonster() override;
+    bool isMonster() const override;
 private:
     /*
      * Prints the card info:

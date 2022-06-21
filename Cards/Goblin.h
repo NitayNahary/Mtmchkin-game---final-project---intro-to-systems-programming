@@ -12,7 +12,7 @@ public:
      * @return
      *      void
     */
-    void applyWin(Player& player) override;
+    void applyWin(Player& player) const override;
 
     /*
      * Applying a win sequence on the card only with loot
@@ -21,7 +21,7 @@ public:
      * @return
      *      void
     */
-    void applyWinOnlyLoot(Player& player) override;
+    void applyWinOnlyLoot(Player& player) const override;
 
     /*
      * Operates a loss sequence on the card
@@ -30,7 +30,7 @@ public:
      * @return
      *      void
     */
-    void applyLose(Player& player) override;
+    void applyLose(Player& player) const override;
 
     /*
     * Empty C'tor of Goblin card
@@ -44,7 +44,10 @@ public:
     * @return
     *      A new instance of Goblin.
     */
-    Goblin() : MonsterCard(6,2,10,false){}
+    Goblin() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+    Goblin(const Goblin& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+    Goblin& operator=(const Goblin& src){return *this;}
+    ~Goblin() override = default;
 private:
 
     /*
@@ -54,7 +57,10 @@ private:
      *      void
     */
     void printInfo() const override;
-
+    static const int M_FORCE = 6;
+    static const int M_LOOT = 2;
+    static const int M_DAMAGE = 10;
+    static const bool M_ISDRAGON = false;
 };
 
 

@@ -1,14 +1,12 @@
 
 #include "Fairy.h"
 
-Fairy::Fairy() : m_isWizard(false){}
-
-void Fairy::applyEncounter(Player &player){
-    m_isWizard = player.getClass() == "Wizard";
-    if(m_isWizard){
+void Fairy::applyEncounter(Player &player) const{
+    bool isWizard = player.getClass() == "Wizard";
+    if(isWizard){
         player.heal(M_EFFECT_VALUE);
     }
-    printFairyMessage(m_isWizard);
+    printFairyMessage(isWizard);
 }
 
 void Fairy::printInfo() const {
@@ -16,6 +14,6 @@ void Fairy::printInfo() const {
     printEndOfCardDetails(std::cout);
 }
 
-bool Fairy::isMonster() {
+bool Fairy::isMonster() const{
     return false;
 }
