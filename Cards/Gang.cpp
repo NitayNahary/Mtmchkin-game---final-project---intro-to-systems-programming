@@ -54,7 +54,7 @@ bool Gang::isMonster() const{
     return false;
 }
 
-Gang::Gang(const Gang &src) : Card() , m_gang(), m_open(src.m_open){
+Gang::Gang(const Gang &src) : Card() , m_open(src.m_open){
     for(const std::unique_ptr<MonsterCard>& monster : src.m_gang){
         if(dynamic_cast<Dragon*>(&*monster)){
             m_gang.push_back(std::unique_ptr<MonsterCard>(new Dragon()));
