@@ -27,11 +27,9 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
         }
         std::string::size_type st;
         inputAsInt = std::stoi(input, &st);
-        if(inputAsInt < startOfRange || inputAsInt > endOfRange){
+        outRange = (inputAsInt < startOfRange || inputAsInt > endOfRange);
+        if(outRange) {
             invalidError();
-            outRange = true;
-        }else{
-            outRange = false;
         }
     } while (outRange);
     dest = inputAsInt;
