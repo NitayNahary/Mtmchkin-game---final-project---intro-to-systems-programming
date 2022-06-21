@@ -33,10 +33,10 @@ void Merchant::applyEncounter(Player &player) {
     }
     switch(m_buy){
         case M_BUY_FORCE:
-            printMerchantSummary(std::cout, m_buyerName, m_buy, hadMoney ? M_FORCE_COST : 0);
+            printMerchantSummary(std::cout, m_buyerName, m_buy, hadMoney ? M_FORCE_COST : M_BUY_NOTHING);
             break;
         case M_BUY_HP:
-            printMerchantSummary(std::cout, m_buyerName, m_buy, hadMoney ? M_HP_COST : 0);
+            printMerchantSummary(std::cout, m_buyerName, m_buy, hadMoney ? M_HP_COST : M_BUY_NOTHING);
             break;
         default:
             printMerchantSummary(std::cout, m_buyerName, m_buy, M_BUY_NOTHING);

@@ -15,7 +15,7 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
     do {
         outRange = false;
         std::getline(std::cin, input);
-        std::cerr << "1:" << input << std::endl;
+     //   std::cerr << "1:" << input << std::endl;
         while (std::cin.fail() || input.find_first_not_of("0123456789") != std::string::npos) {
             if(std::cin.eof()){
                 throw EndOfFile();
@@ -26,13 +26,13 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
                 std::cin.ignore(FAIL_BUFFER, '\n');
             }
             std::getline(std::cin, input);
-            std::cerr << "2:" << input << std::endl;
+     //       std::cerr << "2:" << input << std::endl;
         }
         std::string::size_type st;
         try {
             inputAsInt = std::stoi(input, &st);
             outRange = (inputAsInt < startOfRange || inputAsInt > endOfRange);
-        }catch(std::out_of_range& a){
+        }catch(...){
             outRange = true;
         }
         if(outRange) {
