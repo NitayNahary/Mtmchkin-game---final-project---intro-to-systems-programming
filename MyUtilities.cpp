@@ -11,8 +11,9 @@ void printTeamErrors(){
 void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalidError()){
     std::string input;
     int inputAsInt;
-    bool outRange = false;
+    bool outRange;
     do {
+        outRange = false;
         std::getline(std::cin, input);
         while (std::cin.fail() || input.find_first_not_of("0123456789") != std::string::npos) {
             if(std::cin.eof()){
@@ -26,10 +27,14 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
             std::getline(std::cin, input);
         }
         std::string::size_type st;
-        inputAsInt = std::stoi(input, &st);
-        outRange = (inputAsInt < startOfRange || inputAsInt > endOfRange);
-        if(outRange) {
-            invalidError();
+        try {
+            inputAsInt = std::stoi(input, &st);
+            outRange = (inputAsInt < startOfRange || inputAsInt > endOfRange);
+            if(outRange) {
+                invalidError();
+            }
+        }catch(std::out_of_range& a){
+            outRange = true;
         }
     } while (outRange);
     dest = inputAsInt;
