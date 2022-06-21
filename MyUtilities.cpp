@@ -13,7 +13,6 @@ void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalid
     int inputAsInt;
     bool outRange;
     do {
-        outRange = false;
         std::getline(std::cin, input);
      //   std::cerr << "1:" << input << std::endl;
         while (std::cin.fail() || input.find_first_not_of("0123456789") != std::string::npos) {

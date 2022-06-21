@@ -19,7 +19,7 @@
 *           dest - a reference to the input parameter
 *           startOfRange - the min value of the input
 *           EndOfRange - the max value of the input
-*           invalidError -
+*           void function pointer with no param - invalid input print message
 *
 *  @return
 *          int - number of rounds played
@@ -30,7 +30,7 @@ void getIntInputNumber(int& dest, int startOfRange = -INT_MAX, int endOfRange = 
 *  Get a string input number between start and end of a specific range
 *   @param
 *           dest - a reference to the input parameter
-*           invalidError -
+*           void function pointer with no param - invalid input print message
 *
 *  @return
 *          int - number of rounds played
