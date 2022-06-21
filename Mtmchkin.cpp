@@ -156,6 +156,11 @@ void Mtmchkin::initPlayers(){
 }
 
 int Mtmchkin::buildMyPlayer(const string& playerType , const string& name){
+    try {
+        Wizard nameCheck(name); //dummy player for name check
+    }catch(InvalidName& a){
+        return INVALID_NAME;
+    }
     switch (CLASS_LEXICON[playerType]){
         case PlayerClass::Wizard:
             m_activePlayers.push_back(unique_ptr<Player>(new Wizard(name)));
@@ -167,11 +172,6 @@ int Mtmchkin::buildMyPlayer(const string& playerType , const string& name){
             m_activePlayers.push_back(unique_ptr<Player>(new Fighter(name)));
             break;
         default:
-            try {
-                Wizard nameCheck(name); //dummy player for name check
-            }catch(InvalidName& a){
-                return INVALID_NAME;
-            }
             return INVALID_CLASS;
     }
     return VALID_INPUT;
