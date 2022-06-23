@@ -62,8 +62,8 @@ int Mtmchkin::buildCard(const string& cardTypeIndex){
     unique_ptr<MonsterCard> monsterCardType;
     Gang* gang = m_deck.empty() ?  nullptr : dynamic_cast<Gang*>(&(*m_deck.back()));
 
-    GeneralCardType generalMonsterType = getNonMonsterCardType(nonMonsterCardType, cardTypeIndex);
-    GeneralCardType generalNonMonsterType = getMonsterCardType(monsterCardType, cardTypeIndex);
+    GeneralCardType generalNonMonsterType = getNonMonsterCardType(nonMonsterCardType, cardTypeIndex);
+    GeneralCardType generalMonsterType = getMonsterCardType(monsterCardType, cardTypeIndex);
     GeneralCardType generalCard = (generalMonsterType == GeneralCardType::NotFound) ? generalNonMonsterType : generalMonsterType;
 
     if(gang && gang->open()){
@@ -135,6 +135,7 @@ GeneralCardType Mtmchkin::getMonsterCardType(unique_ptr<MonsterCard>& cardType, 
     }
     return GeneralCardType::Monster;
 }
+
 void Mtmchkin::initPlayers(){
     int numberOfPlayers;
     printEnterTeamSizeMessage();
