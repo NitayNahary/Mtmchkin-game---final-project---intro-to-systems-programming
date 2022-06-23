@@ -33,6 +33,8 @@ private:
     */
     void printInfo() const override;
 
+    void printSummery(const bool& hadMoney,const int& itemType,const std::string& name) const;
+
     static const int M_ITEM_VALUE = 1;
     static const int M_HP_COST = 5;
     static const int M_FORCE_COST = 10;

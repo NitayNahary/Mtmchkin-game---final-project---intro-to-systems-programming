@@ -1,9 +1,10 @@
 
 #include "Merchant.h"
+#define BAD_ITEM_TYPE (-1)
 
 void Merchant::applyEncounter(Player &player) const{
     std::string name = player.name();
-    int itemType = -1;
+    int itemType = BAD_ITEM_TYPE;
     printMerchantInitialMessageForInteractiveEncounter(std::cout, name, player.purse());
     getIntInputNumber(itemType, SELL_START_INPUT_RANGE, SELL_END_INPUT_RANGE);
 
@@ -27,6 +28,19 @@ void Merchant::applyEncounter(Player &player) const{
         default:
             throw GeneralError(); // general error unknown
     }
+    printSummery(hadMoney,itemType,name);
+}
+
+bool Merchant::isMonster() const{
+    return false;
+}
+
+void Merchant::printInfo() const {
+    printCardDetails(std::cout, "Merchant");
+    printEndOfCardDetails(std::cout);
+}
+
+void Merchant::printSummery(const bool& hadMoney,const int& itemType,const std::string& name) const{
     if(!hadMoney) {
         printMerchantInsufficientCoins(std::cout);
     }
@@ -40,14 +54,4 @@ void Merchant::applyEncounter(Player &player) const{
         default:
             printMerchantSummary(std::cout, name, itemType, M_BUY_NOTHING);
     }
-}
-
-bool Merchant::isMonster() const{
-    return false;
-}
-
-void Merchant::printInfo() const {
-    printCardDetails(std::cout, "Merchant");
-    printEndOfCardDetails(std::cout);
-
 }
