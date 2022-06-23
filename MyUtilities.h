@@ -19,20 +19,14 @@
 *           startOfRange - the min value of the input
 *           EndOfRange - the max value of the input
 *           void function pointer with no param - invalid input print message
-*
-*  @return
-*          non-negative int withing range (if range is Not to format returns -1)
 */
 void getIntInputNumber(int& dest, int startOfRange = 0, int endOfRange = INT_MAX , void invalidError() = printInvalidInput);
 
 /*
-*  Get a string input number between start and end of a specific range
+*  Get a string input
 *   @param
 *           dest - a reference to the input parameter
 *           void function pointer with no param - invalid input print message
-*
-*  @return
-*          int - number of rounds played
 */
 void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
 
@@ -42,7 +36,7 @@ void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
 *           name - a name
 *
 *  @return
-*          bool - true/false
+*          bool - true/false if longer than required or is not all alpha-bet chars
 */
 bool isValidName(const std::string& name);
 
