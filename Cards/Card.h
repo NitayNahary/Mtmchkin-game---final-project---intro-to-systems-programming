@@ -1,3 +1,4 @@
+
 #ifndef EX4_Card_H
 #define EX4_Card_H
 
@@ -5,6 +6,7 @@
 #include <iostream>
 #include "../MyUtilities.h"
 #include "../Players/Player.h"
+
 class Card {
     /*
      * Prints the card info:
@@ -13,11 +15,13 @@ class Card {
      *      void
     */
     virtual void printInfo() const = 0;
+
 public:
-    //Default C'tors
+    //Default C'tor, Copt C'tor, Assignment operator
     Card() = default;
     Card(const Card& src) = default;
     Card& operator=(const Card& src) = default;
+
     //Default D'tor
     virtual ~Card() = default;
 

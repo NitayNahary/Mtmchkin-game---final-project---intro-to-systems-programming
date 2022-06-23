@@ -1,8 +1,8 @@
+
 #ifndef HW4_WIZARD_H
 #define HW4_WIZARD_H
 
 #include "Player.h"
-
 
 class Wizard : public Player {
 public:

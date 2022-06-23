@@ -1,3 +1,4 @@
+
 #ifndef HW4_FIGHTER_H
 #define HW4_FIGHTER_H
 
@@ -6,7 +7,7 @@
 
 class Fighter : public Player {
 public:
-    /***
+    /**
             Fighter C'tor - Constructs a new Fighter.
                 @param name - sets Fighter name
                 @return

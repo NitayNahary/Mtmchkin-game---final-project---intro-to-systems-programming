@@ -9,11 +9,11 @@ void Fairy::applyEncounter(Player &player) const{
     printFairyMessage(isWizard);
 }
 
+bool Fairy::isMonster() const{
+    return false;
+}
+
 void Fairy::printInfo() const {
     printCardDetails(std::cout, "Fairy");
     printEndOfCardDetails(std::cout);
-}
-
-bool Fairy::isMonster() const{
-    return false;
 }

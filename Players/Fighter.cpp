@@ -1,3 +1,4 @@
+
 #include "Fighter.h"
 
 Fighter::Fighter(const std::string name)  : Player(name){}

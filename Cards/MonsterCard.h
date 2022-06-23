@@ -1,24 +1,10 @@
-//
-// Created by shach on 6/19/2022.
-//
 
 #ifndef HW4_MONSTERCARD_H
 #define HW4_MONSTERCARD_H
+
 #include "Card.h"
 
 class MonsterCard : public Card{
-    /*
-     * Prints the card info:
-     *
-     * @return
-     *      void
-    */
-    virtual void printInfo() const override = 0;
-protected:
-    int m_force;
-    int m_loot;
-    int m_damage;
-    bool m_isDragon;
 public:
     /*
     * C'tor of MonsterCard card
@@ -32,10 +18,14 @@ public:
     *      A new instance of MonsterCard.
     */
     MonsterCard(int force, int loot,int damage, bool isDragon);
+
+    // Delete Copy C'tor and Assignment operator
     MonsterCard(const MonsterCard& src) = delete;
     MonsterCard& operator=(const MonsterCard& src) = delete;
+
     //Default D'tor
     virtual ~MonsterCard() override = default;
+
     /*
      * Operates a win sequence on the card
      *
@@ -44,6 +34,7 @@ public:
      *      void
     */
     virtual void applyWin(Player& player) const = 0;
+
     /*
      * Applying a win sequence on the card only with loot
      *
@@ -52,6 +43,7 @@ public:
      *      void
     */
     virtual void applyWinOnlyLoot(Player& player) const = 0;
+
     /*
      * Operates a loss sequence on the card
      *
@@ -60,6 +52,7 @@ public:
      *      void
     */
     virtual void applyLose(Player& player) const = 0;
+
     /* Handling the player's applyEncounter with the card:
     *
     * @param player - The player.
@@ -67,6 +60,7 @@ public:
     *      void
     */
     void applyEncounter(Player& player) const override;
+
     /* Handling the player's applyEncounter with the card only with a Gang:
     *
     * @param player - The player.
@@ -74,8 +68,10 @@ public:
     *      void
     */
     bool applyEncounterGangMembers(Player &player) const;
+
     //operator << prints the players details in this format:
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
+
     /*
      * Check if the card is a monster card
      *
@@ -84,7 +80,19 @@ public:
     */
     bool isMonster() const override;
 
+private:
+    /*
+    * Prints the card info:
+    *
+    *       @return
+    *            void
+    */
+    virtual void printInfo() const override = 0;
+protected:
+    int m_force;
+    int m_loot;
+    int m_damage;
+    bool m_isDragon;
 };
-
 
 #endif //HW4_MONSTERCARD_H

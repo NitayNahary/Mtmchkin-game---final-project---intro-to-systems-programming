@@ -1,6 +1,7 @@
 
 #ifndef HW4_TREASURE_H
 #define HW4_TREASURE_H
+
 #include "Card.h"
 
 class Treasure : public Card {

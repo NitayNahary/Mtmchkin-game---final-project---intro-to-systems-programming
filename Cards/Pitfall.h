@@ -1,6 +1,7 @@
 
 #ifndef HW4_PITFALL_H
 #define HW4_PITFALL_H
+
 #include "Card.h"
 
 class Pitfall : public Card{
@@ -29,6 +30,7 @@ private:
      *      void
     */
     void printInfo() const override;
+
     static const int M_EFFECT_VALUE = 10;
 };
 

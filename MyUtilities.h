@@ -36,6 +36,7 @@ void getIntInputNumber(int& dest, int startOfRange = -INT_MAX, int endOfRange = 
 *          int - number of rounds played
 */
 void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
+
 /*
 *  Check if a name is a valid name
 *   @param
@@ -46,5 +47,7 @@ void getStringInput(std::string& dest, void invalidError() = printInvalidInput);
 */
 bool isValidName(const std::string& name);
 
+// prints team errors
 void printTeamErrors();
+
 #endif //MY_UTIL_H

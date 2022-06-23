@@ -1,3 +1,4 @@
+
 #include "Rogue.h"
 #include <ostream>
 

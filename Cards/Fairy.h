@@ -1,6 +1,7 @@
 
 #ifndef HW4_FAIRY_H
 #define HW4_FAIRY_H
+
 #include "Card.h"
 
 class Fairy : public Card {
@@ -21,6 +22,7 @@ public:
      *      false
     */
     bool isMonster() const override;
+
 private:
     /*
      * Prints the card info:

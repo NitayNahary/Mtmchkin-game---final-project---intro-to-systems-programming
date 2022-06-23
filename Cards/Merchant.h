@@ -1,9 +1,11 @@
 
 #ifndef HW4_MERCHANT_H
 #define HW4_MERCHANT_H
+
 #include "Card.h"
 #define SELL_START_INPUT_RANGE 0
 #define SELL_END_INPUT_RANGE 2
+
 class Merchant : public Card {
 public:
     /*
@@ -38,7 +40,5 @@ private:
     static const int M_BUY_HP = 1;
     static const int M_BUY_FORCE = 2;
 };
-
-
 
 #endif //HW4_MERCHANT_H

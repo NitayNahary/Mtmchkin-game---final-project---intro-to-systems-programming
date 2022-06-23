@@ -13,6 +13,7 @@ public:
      *      void
     */
     void applyEncounter(Player &player) const override;
+
     /*
      * Check if the card is a monster card
      *
@@ -20,6 +21,7 @@ public:
      *      false
     */
     bool isMonster() const override;
+
 private:
     /*
      * Prints the card info:

@@ -1,11 +1,13 @@
 
 #ifndef HW4_EXCEPTION_H
 #define HW4_EXCEPTION_H
+
 #include <string>
 #include <iostream>
 #include <cstring>
 #include <exception>
 
+// Base class Exception inherits from std::exception
 class Exception : public std::exception{
 public:
     virtual ~Exception() override = default;

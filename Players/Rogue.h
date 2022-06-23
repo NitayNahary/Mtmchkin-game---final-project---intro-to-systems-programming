@@ -1,6 +1,6 @@
+
 #ifndef HW4_ROGUE_H
 #define HW4_ROGUE_H
-
 
 #include "Player.h"
 

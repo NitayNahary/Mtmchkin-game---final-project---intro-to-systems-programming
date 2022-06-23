@@ -1,7 +1,10 @@
+
 #ifndef HW4_VAMPIRE_H
 #define HW4_VAMPIRE_H
+
 #include "Card.h"
 #include "MonsterCard.h"
+
 class Vampire : public MonsterCard{
 public:
     /*
@@ -44,11 +47,12 @@ public:
     *      A new instance of Vampire.
     */
     Vampire() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+
+    // Copy C'tor, Assignment operator and Default D'tor of Vampire card
     Vampire(const Vampire& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
     Vampire& operator=(const Vampire& src){return *this;}
     ~Vampire() override = default;
 private:
-
     /*
      * Prints the card info:
      *
@@ -56,6 +60,7 @@ private:
      *      void
     */
     void printInfo() const override;
+
     static const int M_FORCE = 10;
     static const int M_LOOT = 2;
     static const int M_DAMAGE = 10;

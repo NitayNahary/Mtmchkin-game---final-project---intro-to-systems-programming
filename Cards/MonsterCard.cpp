@@ -1,6 +1,3 @@
-//
-// Created by shach on 6/19/2022.
-//
 
 #include "MonsterCard.h"
 

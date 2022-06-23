@@ -1,6 +1,6 @@
+
 #include "Wizard.h"
 #include <ostream>
-
 
 Wizard::Wizard(const std::string name)  : Player(name){}
 

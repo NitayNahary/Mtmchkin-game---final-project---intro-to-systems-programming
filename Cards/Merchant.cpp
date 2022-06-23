@@ -42,12 +42,12 @@ void Merchant::applyEncounter(Player &player) const{
     }
 }
 
+bool Merchant::isMonster() const{
+    return false;
+}
+
 void Merchant::printInfo() const {
     printCardDetails(std::cout, "Merchant");
     printEndOfCardDetails(std::cout);
 
-}
-
-bool Merchant::isMonster() const{
-    return false;
 }

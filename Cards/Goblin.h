@@ -1,8 +1,10 @@
 
 #ifndef HW4_GOBLIN_H
 #define HW4_GOBLIN_H
+
 #include "Card.h"
 #include "MonsterCard.h"
+
 class Goblin : public MonsterCard{
 public:
     /*
@@ -45,11 +47,12 @@ public:
     *      A new instance of Goblin.
     */
     Goblin() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+
+    // Copy C'tor, Assignment operator and Default D'tor of Goblin card
     Goblin(const Goblin& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
     Goblin& operator=(const Goblin& src){return *this;}
     ~Goblin() override = default;
 private:
-
     /*
      * Prints the card info:
      *
@@ -57,11 +60,11 @@ private:
      *      void
     */
     void printInfo() const override;
+
     static const int M_FORCE = 6;
     static const int M_LOOT = 2;
     static const int M_DAMAGE = 10;
     static const bool M_ISDRAGON = false;
 };
-
 
 #endif //HW4_GOBLIN_H

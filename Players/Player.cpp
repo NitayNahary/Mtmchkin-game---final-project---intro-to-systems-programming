@@ -24,14 +24,14 @@ int Player::purse() const{
     return m_coins;
 }
 
+int Player::getLevel() const{
+    return m_level;
+}
+
 void Player::levelUp(){
     if(m_level < WIN_LEVEL){
         m_level++;
     }
-}
-
-int Player::getLevel() const{
-    return m_level;
 }
 
 void Player::heal(const int hpUp){

@@ -22,7 +22,6 @@
 #include "Players/Wizard.h"
 #include "Players/Rogue.h"
 
-
 #include "MyUtilities.h"
 #include <memory>
 
@@ -82,16 +81,22 @@ public:
     */
     int getNumberOfRounds() const;
 
-
 private:
     std::deque<std::unique_ptr<Card>> m_deck;
     std::deque<std::unique_ptr<Player>> m_activePlayers;
     std::deque<std::unique_ptr<Player>> m_winPlayers;
     std::deque<std::unique_ptr<Player>> m_deadPlayers;
     int m_roundsPlayed;
+    // Read cards from deck file
     void readCards(const std::string& fileName);
+
+    // Initiate players
     void initPlayers();
+
+    //Build a player with class
     int buildMyPlayer(const std::string& playerType, const std::string& name);
+
+    // Build a deck of cards
     int buildCard(const std::string& cardTypeIndex);
     /*
      * updates game status:
@@ -101,6 +106,8 @@ private:
      * midgame otherwise
      */
     bool changePlayerStatus(std::unique_ptr<Player>& player);
+
+    // returns the card type
     int getCardType(std::unique_ptr<Card>& cardType, const std::string& cardTypeIndex);
     };
 

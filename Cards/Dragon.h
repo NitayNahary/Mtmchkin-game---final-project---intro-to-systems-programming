@@ -1,7 +1,10 @@
+
 #ifndef HW4_DRAGON_H
 #define HW4_DRAGON_H
+
 #include "Card.h"
 #include "MonsterCard.h"
+
 class Dragon : public MonsterCard{
 public:
     /*
@@ -30,6 +33,7 @@ public:
      *      void
     */
     void applyLose(Player& player) const override;
+
     /*
     * Empty C'tor of Dragon card
     *
@@ -43,6 +47,8 @@ public:
     *      A new instance of Dragon.
     */
     Dragon() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+
+    // Copy C'tor, Assignment operator and Default D'tor of Dragon card
     Dragon(const Dragon& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
     Dragon& operator=(const Dragon& src){return *this;}
     ~Dragon() override = default;
@@ -55,6 +61,7 @@ private:
      *      void
     */
     void printInfo() const override;
+
     static const int M_FORCE = 25;
     static const int M_LOOT = 1000;
     static const int M_DAMAGE = 1000000;
