@@ -3,9 +3,8 @@
 #define HW4_GOBLIN_H
 
 #include "Card.h"
-#include "MonsterCard.h"
-
-class Goblin : public MonsterCard{
+#include "MonsterBehavior.h"
+class Goblin : public MonsterBehavior{
 public:
     /*
      * Operates a win sequence on the card
@@ -34,24 +33,7 @@ public:
     */
     void applyLose(Player& player) const override;
 
-    /*
-    * Empty C'tor of Goblin card
-    *
-    *       @param
-     *          MonsterCard C'tor initialized with:
-     *          force - the force of the card
-     *          loot - the amount of coins a player gets when wins
-     *          damage - the damage to a player losing to this card
-     *          isDragon - false
-    * @return
-    *      A new instance of Goblin.
-    */
-    Goblin() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
-
-    // Copy C'tor, Assignment operator and Default D'tor of Goblin card
-    Goblin(const Goblin& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
-    Goblin& operator=(const Goblin& src){return *this;}
-    ~Goblin() override = default;
+    int getForce() const override;
 private:
     /*
      * Prints the card info:

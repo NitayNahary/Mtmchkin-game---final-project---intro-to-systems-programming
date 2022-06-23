@@ -26,7 +26,7 @@ static void getIntInputNumberAux(string& input, void invalidError()){
 }
 
 void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalidError()){
-    if(startOfRange < 0 || endOfRange || (endOfRange < startOfRange)){
+    if(startOfRange < 0 || (endOfRange < startOfRange)){
         dest = INVALID;
         return;
     }

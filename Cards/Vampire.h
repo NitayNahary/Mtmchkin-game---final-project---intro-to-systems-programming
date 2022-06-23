@@ -4,8 +4,9 @@
 
 #include "Card.h"
 #include "MonsterCard.h"
+#include "MonsterBehavior.h"
 
-class Vampire : public MonsterCard{
+class Vampire : public MonsterBehavior{
 public:
     /*
      * Operates a win sequence on the card
@@ -34,24 +35,8 @@ public:
     */
     void applyLose(Player& player) const override;
 
-    /*
-    * Empty C'tor of Vampire card
-    *
-    *       @param
-     *          MonsterCard C'tor initialized with:
-     *          force - the force of the card
-     *          loot - the amount of coins a player gets when wins
-     *          damage - the damage to a player losing to this card
-     *          isDragon - false
-    * @return
-    *      A new instance of Vampire.
-    */
-    Vampire() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
+    int getForce() const override;
 
-    // Copy C'tor, Assignment operator and Default D'tor of Vampire card
-    Vampire(const Vampire& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
-    Vampire& operator=(const Vampire& src){return *this;}
-    ~Vampire() override = default;
 private:
     /*
      * Prints the card info:

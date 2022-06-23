@@ -9,14 +9,8 @@ Gang::Gang() {
 }
 
 Gang::Gang(const Gang &src) : Card() , m_open(src.m_open), m_gang(){
-    for(const std::unique_ptr<MonsterCard>& monster : src.m_gang){
-        if(dynamic_cast<Dragon*>(&*monster)){
-            m_gang.push_back(std::unique_ptr<MonsterCard>(new Dragon()));
-        }else if(dynamic_cast<Goblin*>(&*monster)){
-            m_gang.push_back(std::unique_ptr<MonsterCard>(new Goblin()));
-        }else if(dynamic_cast<Vampire*>(&*monster)){
-            m_gang.push_back(std::unique_ptr<MonsterCard>(new Vampire()));
-        }
+    for(const std::unique_ptr<MonsterCard>& monster : src.m_gang) {
+        m_gang.push_back(std::unique_ptr<MonsterCard>(new MonsterCard(*monster)));
     }
 }
 
@@ -26,13 +20,7 @@ Gang &Gang::operator=(const Gang &src) {
     }
     std::deque<std::unique_ptr<MonsterCard>> temp_gang;
     for(const std::unique_ptr<MonsterCard>& monster : src.m_gang){
-        if(dynamic_cast<Dragon*>(&*monster)){
-            temp_gang.push_back(std::unique_ptr<MonsterCard>(new Dragon()));
-        }else if(dynamic_cast<Goblin*>(&*monster)){
-            temp_gang.push_back(std::unique_ptr<MonsterCard>(new Goblin()));
-        }else if(dynamic_cast<Vampire*>(&*monster)){
-            temp_gang.push_back(std::unique_ptr<MonsterCard>(new Vampire()));
-        }
+        temp_gang.push_back(std::unique_ptr<MonsterCard>(new MonsterCard(*monster)));
     }
     std::swap(m_gang, temp_gang);
     m_open = src.m_open;
@@ -47,7 +35,7 @@ void Gang::applyEncounter(Player &player) const{
                 unDefeated = false;
             }
         }else{
-            monster->applyLose(player);
+            monster->lose(player);
         }
     }
     if(unDefeated){

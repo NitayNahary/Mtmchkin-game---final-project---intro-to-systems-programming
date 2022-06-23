@@ -1,24 +1,30 @@
 
 #include "Vampire.h"
 
+static const std::string M_NAME = "Vampire";
+
 void Vampire::applyWin(Player &player) const{
     player.levelUp();
-    player.addCoins(m_loot);
-    printWinBattle(player.name(), "Vampire");
+    player.addCoins(M_LOOT);
+    printWinBattle(player.name(), M_NAME);
 }
 
 void Vampire::applyWinOnlyLoot(Player &player) const{
-    player.addCoins(m_loot);
+    player.addCoins(M_LOOT);
 }
 
 void Vampire::applyLose(Player &player) const{
-    player.damage(m_damage);
+    player.damage(M_DAMAGE);
     player.weaken();
-    printLossBattle(player.name(), "Vampire");
+    printLossBattle(player.name(), M_NAME);
 }
 
 void Vampire::printInfo() const {
-    printCardDetails(std::cout, "Vampire");
-    printMonsterDetails(std::cout,m_force,m_damage, m_loot, m_isDragon);
+    printCardDetails(std::cout, M_NAME);
+    printMonsterDetails(std::cout,M_FORCE,M_DAMAGE, M_LOOT, M_ISDRAGON);
     printEndOfCardDetails(std::cout);
+}
+
+int Vampire::getForce() const {
+    return M_FORCE;
 }

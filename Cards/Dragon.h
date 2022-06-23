@@ -3,9 +3,9 @@
 #define HW4_DRAGON_H
 
 #include "Card.h"
-#include "MonsterCard.h"
+#include "MonsterBehavior.h"
 
-class Dragon : public MonsterCard{
+class Dragon : public MonsterBehavior{
 public:
     /*
      * Operates a win sequence on the card
@@ -34,24 +34,7 @@ public:
     */
     void applyLose(Player& player) const override;
 
-    /*
-    * Empty C'tor of Dragon card
-    *
-    *       @param
-     *          MonsterCard C'tor initialized with:
-     *          force - the force of the card
-     *          loot - the amount of coins a player gets when wins
-     *          damage - the damage to a player losing to this card - infinite
-     *          isDragon - true
-    * @return
-    *      A new instance of Dragon.
-    */
-    Dragon() : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
-
-    // Copy C'tor, Assignment operator and Default D'tor of Dragon card
-    Dragon(const Dragon& src) : MonsterCard(M_FORCE,M_LOOT,M_DAMAGE,M_ISDRAGON){}
-    Dragon& operator=(const Dragon& src){return *this;}
-    ~Dragon() override = default;
+    int getForce() const override;
 private:
 
     /*
