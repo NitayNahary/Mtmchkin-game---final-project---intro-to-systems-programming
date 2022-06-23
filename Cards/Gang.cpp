@@ -40,17 +40,17 @@ Gang &Gang::operator=(const Gang &src) {
 }
 
 void Gang::applyEncounter(Player &player) const{
-    bool lostOnce = false;
+    bool unDefeated = true;
     for(const std::unique_ptr<MonsterCard>& monster : m_gang){
-        if(!lostOnce) {
+        if(unDefeated) {
             if (!monster->applyEncounterGangMembers(player)) {
-                lostOnce = true;
+                unDefeated = false;
             }
         }else{
             monster->applyLose(player);
         }
     }
-    if(!lostOnce){
+    if(unDefeated){
         player.levelUp();
         printWinBattle(player.name(), "Gang");
     }

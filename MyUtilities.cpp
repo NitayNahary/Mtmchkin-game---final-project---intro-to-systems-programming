@@ -7,25 +7,36 @@ void printTeamErrors(){
     printInvalidTeamSize();
     printEnterTeamSizeMessage();
 }
+/*
+ * check for only numerical string, handles fails and non-numerical strings.
+ */
+static void getIntInputNumberAux(string& input, void invalidError()){
+    std::getline(std::cin, input);
+    while (std::cin.fail() || input.find_first_not_of("0123456789") != std::string::npos) {
+        if(std::cin.eof()){
+            throw EndOfFile();
+        }
+        invalidError();
+        std::cin.clear();
+        if(std::cin.fail()){
+            std::cin.ignore(FAIL_BUFFER, '\n');
+        }
+        std::getline(std::cin, input);
+    }
+}
 
 void getIntInputNumber(int& dest, int startOfRange, int endOfRange, void invalidError()){
+    if(startOfRange < 0 || endOfRange || (endOfRange < startOfRange)){
+        dest = INVALID;
+        return;
+    }
     std::string input;
+    std::string::size_type st;
     int inputAsInt;
     bool outRange;
+
     do {
-        std::getline(std::cin, input);
-        while (std::cin.fail() || input.find_first_not_of("0123456789") != std::string::npos) {
-            if(std::cin.eof()){
-                throw EndOfFile();
-            }
-            invalidError();
-            std::cin.clear();
-            if(std::cin.fail()){
-                std::cin.ignore(FAIL_BUFFER, '\n');
-            }
-            std::getline(std::cin, input);
-        }
-        std::string::size_type st;
+        getIntInputNumberAux(input, invalidError);
         try {
             inputAsInt = std::stoi(input, &st);
             outRange = (inputAsInt < startOfRange || inputAsInt > endOfRange);

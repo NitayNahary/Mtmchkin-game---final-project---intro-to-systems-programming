@@ -8,14 +8,6 @@
 #include "../Players/Player.h"
 
 class Card {
-    /*
-     * Prints the card info:
-     *
-     * @return
-     *      void
-    */
-    virtual void printInfo() const = 0;
-
 public:
     //Default C'tor, Copt C'tor, Assignment operator
     Card() = default;
@@ -37,6 +29,14 @@ public:
     //operator << prints the players details in this format:
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
 
+private:
+    /*
+     * Prints the card info:
+     *
+     * @return
+     *      void
+    */
+    virtual void printInfo() const = 0;
 };
 
 #endif //EX4_Card_H
