@@ -31,10 +31,6 @@ void Merchant::applyEncounter(Player &player) const{
     printSummery(hadMoney,itemType,name);
 }
 
-bool Merchant::isMonster() const{
-    return false;
-}
-
 void Merchant::printInfo() const {
     printCardDetails(std::cout, "Merchant");
     printEndOfCardDetails(std::cout);

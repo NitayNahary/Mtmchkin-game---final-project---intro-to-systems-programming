@@ -9,10 +9,6 @@ void Barfight::applyEncounter(Player &player) const{
     printBarfightMessage(isFighter);
 }
 
-bool Barfight::isMonster() const{
-    return false;
-}
-
 void Barfight::printInfo() const {
     printCardDetails(std::cout, "Barfight");
     printEndOfCardDetails(std::cout);

@@ -31,7 +31,7 @@
 #define MIN_PLAYERS 2
 #define MAX_PLAYERS 6
 
-
+enum class GeneralCardType{NotFound, Monster, NonMonster, EndGang};
 enum class CardTypes{notCard,Barfight , Dragon , Fairy , Goblin , Merchant , Treasure , Pitfall , Vampire, Gang, EndGang};
 enum class PlayerClass{notClass,Rogue , Wizard , Fighter};
 
@@ -107,9 +107,12 @@ private:
      */
     bool changePlayerStatus(std::unique_ptr<Player>& player);
 
-    // returns the card type
-    int getCardType(std::unique_ptr<Card>& cardType, const std::string& cardTypeIndex);
-    };
+    // returns the non battle card type
+    GeneralCardType getNonMonsterCardType(std::unique_ptr<Card>& cardType, const std::string& cardTypeIndex);
+
+    // returns the battle card type
+    GeneralCardType getMonsterCardType(std::unique_ptr<MonsterCard> &cardType, const std::string &cardTypeIndex);
+};
 
 
 #endif //HW4_MTMCHKIN_H

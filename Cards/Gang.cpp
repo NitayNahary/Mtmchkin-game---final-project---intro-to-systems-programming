@@ -56,14 +56,8 @@ void Gang::applyEncounter(Player &player) const{
     }
 }
 
-void Gang::pushBack(std::unique_ptr<Card> addToGang) {
-    Card* rawGangMemeber = addToGang.release();
-    MonsterCard* monster = static_cast<MonsterCard*>(rawGangMemeber);
-    m_gang.push_back(std::unique_ptr<MonsterCard>(monster));
-}
-
-bool Gang::isMonster() const{
-    return false;
+void Gang::pushBack(std::unique_ptr<MonsterCard> addToGang) {
+    m_gang.push_back(std::move(addToGang));
 }
 
 bool Gang::open() const {
@@ -75,9 +69,5 @@ void Gang::close(){
 }
 
 void Gang::printInfo() const{
-    for(const std::unique_ptr<MonsterCard>& monster : m_gang){
-        Card* monsterCard = static_cast<Card*>(&*monster);
-        std::cout << monsterCard << std::endl;
-    }
-    std::cerr<< "GangBANG" <<std::endl;
+    std::cerr<< "Gang" <<std::endl;
 }

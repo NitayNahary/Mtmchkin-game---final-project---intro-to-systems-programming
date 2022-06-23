@@ -6,10 +6,6 @@ void Treasure::applyEncounter(Player &player) const{
     printTreasureMessage();
 }
 
-bool Treasure::isMonster() const{
-    return false;
-}
-
 void Treasure::printInfo() const {
     printCardDetails(std::cout, "Treasure");
     printEndOfCardDetails(std::cout);

@@ -36,15 +36,7 @@ class Gang : public Card{
      * @return
      *      void
     */
-    void pushBack(std::unique_ptr<Card> addToGang);
-
-    /*
-     * Check if the card is a monster card
-     *
-     * @return
-     *      false
-    */
-    bool isMonster() const override;
+    void pushBack(std::unique_ptr<MonsterCard> addToGang);
 
     //initialize m_open to true
     bool open() const;

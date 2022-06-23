@@ -8,13 +8,10 @@ using std::cerr;
 using std::endl;
 using std::string;
 
-
-#define VALID_INPUT 1
 #define INVALID_CLASS (-2)
 #define INVALID_NAME (-1)
 #define INVALID_CARD (-1)
-#define GANG_CARD 2
-#define ENDGANG_CARD 3
+#define VALID_INPUT (1)
 
 static map<string, CardTypes> CARD_LEXICON = {{"Barfight", CardTypes::Barfight},
                                               {"Dragon",   CardTypes::Dragon},
@@ -61,47 +58,47 @@ void Mtmchkin::readCards(const string& fileName){
     }
 }
 int Mtmchkin::buildCard(const string& cardTypeIndex){
-    unique_ptr<Card> cardType;
+    unique_ptr<Card> nonMonsterCardType;
+    unique_ptr<MonsterCard> monsterCardType;
     Gang* gang = m_deck.empty() ?  nullptr : dynamic_cast<Gang*>(&(*m_deck.back()));
-    int inputValidity = getCardType(cardType, cardTypeIndex);
-    switch (inputValidity) {
-        case INVALID_CARD:
-            return INVALID_CARD;
-        case ENDGANG_CARD:
-            if(!gang || !gang->open()){
+
+    GeneralCardType generalMonsterType = getNonMonsterCardType(nonMonsterCardType, cardTypeIndex);
+    GeneralCardType generalNonMonsterType = getMonsterCardType(monsterCardType, cardTypeIndex);
+    GeneralCardType generalCard = (generalMonsterType == GeneralCardType::NotFound) ? generalNonMonsterType : generalMonsterType;
+
+    if(gang && gang->open()){
+        switch(generalMonsterType){
+            case GeneralCardType::Monster:
+                gang->pushBack(std::move(monsterCardType));
+                break;
+            case  GeneralCardType::EndGang:
+                gang->close();
+                break;
+            default:
                 return INVALID_CARD;
-            }
-            gang->close();
-            break;
-        case GANG_CARD:
-            if(gang){
+        }
+    }else{
+        switch(generalCard){
+            case GeneralCardType::Monster:
+                m_deck.push_back(std::move(monsterCardType));
+                break;
+            case GeneralCardType::NonMonster:
+                m_deck.push_back(std::move(nonMonsterCardType));
+                break;
+            default:
                 return INVALID_CARD;
-            }
-        default:
-            if(gang && gang->open()){
-                if(!cardType->isMonster()){
-                    return INVALID_CARD;
-                }
-                gang->pushBack(std::move(cardType));
-            }else{
-                m_deck.push_back(std::move(cardType));
-            }
+        }
     }
     return VALID_INPUT;
 }
-int Mtmchkin::getCardType(unique_ptr<Card>& cardType, const string& cardTypeIndex){
+
+GeneralCardType Mtmchkin::getNonMonsterCardType(unique_ptr<Card>& cardType, const string& cardTypeIndex){
     switch (CARD_LEXICON[cardTypeIndex]){
         case CardTypes::Barfight:
             cardType = std::move(std::unique_ptr<Card>(new Barfight()));
             break;
-        case CardTypes::Dragon:
-            cardType = std::move(std::unique_ptr<Card>(new Dragon()));
-            break;
         case CardTypes::Fairy:
             cardType = std::move(std::unique_ptr<Card>(new Fairy()));
-            break;
-        case CardTypes::Goblin:
-            cardType =std::move(std::unique_ptr<Card>(new Goblin()));
             break;
         case CardTypes::Merchant:
             cardType = std::move(std::unique_ptr<Card>(new Merchant()));
@@ -112,18 +109,31 @@ int Mtmchkin::getCardType(unique_ptr<Card>& cardType, const string& cardTypeInde
         case CardTypes::Treasure:
             cardType = std::move(std::unique_ptr<Card>(new Treasure()));
             break;
-        case CardTypes::Vampire:
-            cardType = std::move(std::unique_ptr<Card>(new Vampire()));
-            break;
         case CardTypes::Gang:
             cardType = std::move(std::unique_ptr<Card>(new Gang()));
-            return GANG_CARD;
-        case CardTypes::EndGang:
-            return ENDGANG_CARD;
+            break;
         default:
-            return INVALID_CARD;
+            return GeneralCardType::NotFound;
     }
-    return VALID_INPUT;
+    return GeneralCardType::NonMonster;
+}
+GeneralCardType Mtmchkin::getMonsterCardType(unique_ptr<MonsterCard>& cardType, const string& cardTypeIndex){
+    switch (CARD_LEXICON[cardTypeIndex]){
+        case CardTypes::Dragon:
+            cardType = std::move(std::unique_ptr<MonsterCard>(new Dragon()));
+            break;
+        case CardTypes::Goblin:
+            cardType = std::move(std::unique_ptr<MonsterCard>(new Goblin()));
+            break;
+        case CardTypes::Vampire:
+            cardType = std::move(std::unique_ptr<MonsterCard>(new Vampire()));
+            break;
+        case CardTypes::EndGang:
+            return GeneralCardType::EndGang;
+        default:
+            return GeneralCardType::NotFound;
+    }
+    return GeneralCardType::Monster;
 }
 void Mtmchkin::initPlayers(){
     int numberOfPlayers;

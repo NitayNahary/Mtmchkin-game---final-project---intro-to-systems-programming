@@ -9,10 +9,6 @@ void Pitfall::applyEncounter(Player &player) const{
     printPitfallMessage(isRogue);
 }
 
-bool Pitfall::isMonster() const{
-    return false;
-}
-
 void Pitfall::printInfo() const {
     printCardDetails(std::cout, "Pitfall");
     printEndOfCardDetails(std::cout);

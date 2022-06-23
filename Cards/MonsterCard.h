@@ -72,14 +72,6 @@ public:
     //operator << prints the players details in this format:
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
 
-    /*
-     * Check if the card is a monster card
-     *
-     * @return
-     *      false
-    */
-    bool isMonster() const override;
-
 private:
     /*
     * Prints the card info:

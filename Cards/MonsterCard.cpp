@@ -24,7 +24,3 @@ bool MonsterCard::applyEncounterGangMembers(Player &player) const{
     }
 }
 
-bool MonsterCard::isMonster() const{
-    return true;
-}
-
