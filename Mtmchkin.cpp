@@ -213,8 +213,8 @@ void Mtmchkin::playRound(){
             m_activePlayers.erase(m_activePlayers.begin()+i);
             i--;
         }
-        m_deck.pop_front();
         m_deck.push_back(std::move(playingCard));
+        m_deck.pop_front();
     }
     if(isGameOver()){
         printGameEndMessage();

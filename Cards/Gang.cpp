@@ -69,13 +69,16 @@ void Gang::close(){
 }
 
 void Gang::printInfo() const{
-    std::cout<< "Gang" << std::endl;
+    std::cout<< "Gang:" << std::endl;
     std::cout<< "-------------------------------" <<std::endl;
     for(const std::unique_ptr<MonsterCard>& monster : m_gang){
         std::cout << *monster << std::endl;
     }
     if(!m_open) {
-        std::cout << "EndGang" << std::endl;
+        std::cout << "End Of Gang" << std::endl;
+        std::cout << "-------------------------------" << std::endl;
+    }else{
+        std::cout << "Still Open For More Monsters - Call 1-800-800-3" << std::endl;
         std::cout << "-------------------------------" << std::endl;
     }
 }
