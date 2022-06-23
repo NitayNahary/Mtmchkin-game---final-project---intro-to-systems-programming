@@ -26,7 +26,7 @@ public:
     */
     virtual void applyEncounter(Player& player) const = 0;
 
-    //operator << prints the players details in this format:
+    //operator << prints the card details
     friend std::ostream& operator<<(std::ostream& os,const Card& card);
 
 private:

@@ -87,30 +87,81 @@ private:
     std::deque<std::unique_ptr<Player>> m_winPlayers;
     std::deque<std::unique_ptr<Player>> m_deadPlayers;
     int m_roundsPlayed;
-    // Read cards from deck file
+
+    /*
+     * Read cards one by one from deck file
+     *          @param:
+     *              const std::string& fileName - deck file name
+     *          @return:
+     *              void
+     */
     void readCards(const std::string& fileName);
 
-    // Initiate players
+    /*
+     * Initialize the players names and class
+     *          @return:
+     *              void
+     */
     void initPlayers();
 
-    //Build a player with class
+    /*
+     * Make the players active in the game
+     *          @param:
+     *              const std::string& playerType - the class of the player
+     *              const std::string& name - the name of the player
+     *          @return:
+     *              INVALID_NAME - the name is not valid
+     *              INVALID_CLASS - the class is not valid
+     *              INVALID_INPUT - the format of name and class is invalid
+     *
+     */
     int buildMyPlayer(const std::string& playerType, const std::string& name);
 
-    // Build a deck of cards
-    int buildCard(const std::string& cardTypeIndex);
     /*
-     * updates game status:
+     * creates a new card
+     *          @param:
+     *              const std::string& cardTypeIndex - index of card type in mpa cardTypes
+     *          @return:
+     *              INVALID_CARD - illegal card
+     *              VALID_INPUT - succes build the card
      *
-     * win if player level hit win condition
-     * loss if player hp hit 0
-     * midgame otherwise
+     */
+    int buildCard(const std::string& cardTypeIndex);
+
+    /*
+     * updates player status:
+     * move to winners if player level hit win condition
+     * move to dead players if player hp hit 0
+     *          @param:
+     *              &Player - a player
+     *          @return:
+     *              false if player status has not changed
+     *              true if player status has changed
+     *
      */
     bool changePlayerStatus(std::unique_ptr<Player>& player);
 
-    // returns the non battle card type
+    /*
+     *  create unique ptr of non monster based on card type index entered
+     *          @param
+     *              unique_ptr<Card>& cardType - destination pointer
+     *              string& cardTypeIndex - index in map
+     *          @return
+     *              GeneralCardType::NonMonster - if the card successfully found
+     *              GeneralCardType::NotFound - if no card matched
+     */
     GeneralCardType getNonMonsterCardType(std::unique_ptr<Card>& cardType, const std::string& cardTypeIndex);
 
-    // returns the battle card type
+    /*
+     *  create unique ptr of monster based on card type index entered
+     *          @param
+     *              unique_ptr<Card>& cardType - destination pointer
+     *              string& cardTypeIndex - index in map
+     *          @return
+     *              GeneralCardType::Monster - if the card successfully found
+     *              GeneralCardType::NotFound - if no card matched
+     *              GeneralCardType::EndGang - when end gang string found
+     */
     GeneralCardType getMonsterCardType(std::unique_ptr<MonsterCard> &cardType, const std::string &cardTypeIndex);
 };
 

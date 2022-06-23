@@ -119,13 +119,13 @@ GeneralCardType Mtmchkin::getNonMonsterCardType(unique_ptr<Card>& cardType, cons
 GeneralCardType Mtmchkin::getMonsterCardType(unique_ptr<MonsterCard>& cardType, const string& cardTypeIndex){
     switch (CARD_LEXICON[cardTypeIndex]){
         case CardTypes::Dragon:
-            cardType = std::move(std::unique_ptr<MonsterCard>(new MonsterCard(new Dragon())));
+            cardType = std::move(std::unique_ptr<MonsterCard>(new Dragon()));
             break;
         case CardTypes::Goblin:
-            cardType = std::move(std::unique_ptr<MonsterCard>(new MonsterCard(new Goblin())));
+            cardType = std::move(std::unique_ptr<MonsterCard>(new Goblin()));
             break;
         case CardTypes::Vampire:
-            cardType = std::move(std::unique_ptr<MonsterCard>(new MonsterCard(new Vampire())));
+            cardType = std::move(std::unique_ptr<MonsterCard>(new Vampire()));
             break;
         case CardTypes::EndGang:
             return GeneralCardType::EndGang;
@@ -139,6 +139,7 @@ void Mtmchkin::initPlayers(){
     int numberOfPlayers;
     printEnterTeamSizeMessage();
     getIntInputNumber(numberOfPlayers, MIN_PLAYERS, MAX_PLAYERS, printTeamErrors);
+
     bool badInputFlag = false;
     for(int i = 0; i < numberOfPlayers; badInputFlag ? i : i++){
         if(!badInputFlag) { //checking if last round had a bad input

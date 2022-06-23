@@ -26,6 +26,10 @@ private:
     */
     void printInfo() const override;
 
+    /*
+     * prints the summery of the encounter with merchant:
+     * what was bought and for how many coins
+     */
     void printSummery(const bool& hadMoney,const int& itemType,const std::string& name) const;
 
     static const int M_ITEM_VALUE = 1;
